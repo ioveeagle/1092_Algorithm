@@ -1,5 +1,5 @@
 // count in constructor
-//package hw01;
+package hw01;
 
 public class HW01_4108056005_3 extends ArrayData {
 	
