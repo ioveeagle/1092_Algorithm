@@ -1,5 +1,8 @@
 # Algorithm_HW01
 
+[![hackmd-github-sync-badge](https://hackmd.io/vO8TnZ0uRwSwH5hG9_zCAw/badge)](https://hackmd.io/vO8TnZ0uRwSwH5hG9_zCAw)
+
+
 ###### tags: `Java` `演算法`
 
 ## 解題想法
