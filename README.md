@@ -1,5 +1,7 @@
 # 1092_Algorithm_Homework
 
+[![hackmd-github-sync-badge](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA/badge)](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA)
+
 > 1092_演算法作業
 
 ###### tags: `Java` `演算法`
