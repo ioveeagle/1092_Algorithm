@@ -1,12 +1,12 @@
-// count in constructor(final)
-package hw01;
+// count in constructor
+//package hw01;
 
-public class HW01_4108056005_3 extends ArrayData {
+public class HW01_4108056005_1 extends ArrayData {
 	
 	int maximun=-99999999;
 	int minimun=99999999;
 	
-	public HW01_4108056005_3(int[] A) {
+	public HW01_4108056005_1(int[] A) {
 		this.A = A;
 		for(int i=0; i<A.length; i++) {
 			if(A[i]>maximun) {
