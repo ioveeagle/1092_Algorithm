@@ -1,0 +1,6 @@
+case1:
+ThreeSum is zero: 574
+elapsed time 0.001
+
+case2:
+
