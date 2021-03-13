@@ -1,4 +1,4 @@
-// positive and negative case: O(N^2*logN)
+// case2 - positive and negative: O(N^2*logN)
 package hw02;
 
 public class HW02_4108056005_2 extends ThreeSum {

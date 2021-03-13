@@ -6,7 +6,7 @@ elapsed time 0.025
 
 case2:
 ThreeSum is zero: 62156
-elapsed time 0.018
+elapsed time 0.015
 
 ---
 
@@ -17,8 +17,8 @@ ThreeSum is zero: 6224076
 elapsed time 2.09
 
 case2:
-ThreeSum is zero: 6271392
-elapsed time 1.217
+ThreeSum is zero: 6301428
+elapsed time 0.831
 
 ---
 
