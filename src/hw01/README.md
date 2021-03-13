@@ -1,9 +1,9 @@
-# Algorithm_HW01
+# HW01_min and max
 
 [![hackmd-github-sync-badge](https://hackmd.io/vO8TnZ0uRwSwH5hG9_zCAw/badge)](https://hackmd.io/vO8TnZ0uRwSwH5hG9_zCAw)
 
 
-###### tags: `Java` `演算法`
+###### tags: `演算法` `Java`
 
 ## 解題想法
 求陣列中的最大值&最小值
