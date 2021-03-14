@@ -4,9 +4,13 @@
 
 > 1092_演算法作業
 
-###### tags: `Java` `演算法`
+###### tags: `演算法` `Java`
 
 ## overview
-* [HW01 - find max and min](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw01)
+* [HW01_max and min](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw01)
+* [HW02_three sum](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw02)
 
 > 希望演算法可以順利過關~
+
+![](https://i.imgur.com/qfoXPD3.jpg)
+好運貓貓在看你~
