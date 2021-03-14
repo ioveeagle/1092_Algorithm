@@ -1,5 +1,8 @@
 # HW02_three sum
 
+[![hackmd-github-sync-badge](https://hackmd.io/ciP3-k6NSRiUaPT-SDEbTw/badge)](https://hackmd.io/ciP3-k6NSRiUaPT-SDEbTw)
+
+
 ###### tags: `演算法` `Java`
 
 ## 題目
