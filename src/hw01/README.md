@@ -1,4 +1,4 @@
-# Algorithm_HW01
+# HW01_min and max
 
 [![hackmd-github-sync-badge](https://hackmd.io/vO8TnZ0uRwSwH5hG9_zCAw/badge)](https://hackmd.io/vO8TnZ0uRwSwH5hG9_zCAw)
 
