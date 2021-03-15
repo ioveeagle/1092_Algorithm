@@ -6,10 +6,10 @@ public class HW02_4108056005_1 extends ThreeSum {
 	public HW02_4108056005_1() {}
 	
 	public static void main(String[] args) {
-		HW02_4108056005_1 test = new HW02_4108056005_1();
+		HW02_4108056005_1 test1 = new HW02_4108056005_1();
 		int[] A = new RandomArray().readData();
 		Stopwatch stopwatch = new Stopwatch();
-		System.out.println("ThreeSum is zero: "+test.T_sum(A));
+		System.out.println("ThreeSum is zero: "+test1.T_sum(A));
 		double time = stopwatch.elapsedTime();
 		System.out.println("elapsed time " + time);
 	}

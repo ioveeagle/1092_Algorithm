@@ -6,6 +6,7 @@ public class HW02_4108056005_5 extends ThreeSum{
     volatile static int _count;
     
     public static void main(String[] args) {
+    	System.out.println("case5");
     	HW02_4108056005_5 test = new HW02_4108056005_5();
     	int[] A = new RandomArray().readData();
 		Stopwatch stopwatch = new Stopwatch();
@@ -16,8 +17,8 @@ public class HW02_4108056005_5 extends ThreeSum{
 
     private static void merge_sort(int[] arr){
         int[] orderedArr = new int[arr.length];
-        for (int i = 2; i < arr.length << 1; i = i << 1) {
-            for (int j = 0; j < (arr.length + i - 1) / i; j++) {
+        for(int i = 2; i < arr.length << 1; i = i << 1) {
+            for(int j = 0; j < (arr.length + i - 1) / i; j++) {
                 int left = i * j;
                 int mid = (left + (i >> 1)) >= arr.length ? (arr.length - 1) : (left + (i >> 1));
                 int right = i * (j + 1) - 1 >= arr.length ? (arr.length - 1) : (i * (j + 1) - 1);
