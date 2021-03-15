@@ -3,8 +3,6 @@ package hw02;
 
 public class HW02_4108056005_1 extends ThreeSum {
 	
-	public HW02_4108056005_1() {}
-	
 	public static void main(String[] args) {
 		HW02_4108056005_1 test1 = new HW02_4108056005_1();
 		int[] A = new RandomArray().readData();

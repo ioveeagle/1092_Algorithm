@@ -22,3 +22,43 @@ elapsed time 0.831
 
 ---
 
+差不多
+quickSort
+0.070
+mergeSort
+0.069
+
+----
+
+(10000, 50000)
+
+case1:
+ThreeSum is zero: 1253924
+elapsed time 2.085
+
+case2:
+ThreeSum is zero: 1253924
+elapsed time 0.832
+
+case3:
+ThreeSum is zero: 1253924
+elapsed time 0.152
+renew: 0.137
+
+好像在迴圈中宣告變數會跑得比較快?
+
+----
+
+(100000,100000)
+
+case3:
+ThreeSum is zero: 626116862
+elapsed time 10.907
+
+case4:
+ThreeSum is zero: 626116862
+elapsed time 2.515
+
+case5:
+ThreeSum is zero: 626116862
+elapsed time 2.574

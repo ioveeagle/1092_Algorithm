@@ -8,7 +8,7 @@ public class RandomArray {
 	// 每 ctrl+F11 就產生一筆新測資
 	public static void main(String[] args) {
 		RandomArray ra = new RandomArray();
-		ra.createData(10000, 50000);	// 第一個參數是陣列長度，第二個測資是數值範圍(-n~n)
+		ra.createData(100000, 100000);	// 第一個參數是陣列長度，第二個測資是數值範圍(-n~n)
 	}
 	
 	// 產生新測資
