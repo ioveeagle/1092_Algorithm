@@ -14,4 +14,4 @@
 
 好運貓貓~~
 
-![](https://i.imgur.com/U7tXkC1.gif =100%x)
+![](https://i.imgur.com/U7tXkC1.gif)
