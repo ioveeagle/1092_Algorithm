@@ -12,5 +12,6 @@
 
 > 希望演算法可以順利過關~
 
-![](https://i.imgur.com/qfoXPD3.jpg)
-好運貓貓在看你~
+好運貓貓~~
+
+![](https://i.imgur.com/U7tXkC1.gif =100%x)
