@@ -62,3 +62,53 @@ elapsed time 2.515
 case5:
 ThreeSum is zero: 626116862
 elapsed time 2.574
+
+----
+
+(10000,100000)
+
+case4:
+ThreeSum is zero: 623513
+elapsed time 0.141
+
+----
+
+case4:
+ThreeSum is zero: 16935029
+elapsed time 0.542
+
+case5:
+ThreeSum is zero: 16935029
+elapsed time 0.563
+
+----
+
+case4:
+ThreeSum is zero: 39908534
+elapsed time 0.888
+
+case5:
+ThreeSum is zero: 39908534
+elapsed time 0.926
+
+----
+
+case4:
+ThreeSum is zero: 77998370
+elapsed time 1.383
+
+case5:
+ThreeSum is zero: 77998370
+elapsed time 1.417
+
+----
+
+case4:
+ThreeSum is zero: 312969885
+elapsed time 5.432
+
+case5:
+ThreeSum is zero: 312969885
+elapsed time 5.533
+
+

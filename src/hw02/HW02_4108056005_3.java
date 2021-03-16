@@ -1,16 +1,16 @@
 // case3 - sandwich algorithm: O(N^2)
-// package hw02;
+ package hw02;
 
 public class HW02_4108056005_3 extends ThreeSum {
 	
 	public static void main(String[] args) {
-//		System.out.println("case3:");
-//		HW02_4108056005_3 test3 = new HW02_4108056005_3();
-//		int[] A = new RandomArray().readData();
-//		Stopwatch stopwatch = new Stopwatch();
-//		System.out.println("ThreeSum is zero: "+test3.T_sum(A));
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
+		System.out.println("case3:");
+		HW02_4108056005_3 test3 = new HW02_4108056005_3();
+		int[] A = new RandomArray().readData();
+		Stopwatch stopwatch = new Stopwatch();
+		System.out.println("ThreeSum is zero: "+test3.T_sum(A));
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
 	}
 	
 	@Override

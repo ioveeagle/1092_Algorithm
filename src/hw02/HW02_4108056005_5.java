@@ -1,5 +1,5 @@
 // case5_kashiwa is god
-//package hw02;
+package hw02;
 
 public class HW02_4108056005_5 extends ThreeSum{
     static int threadNum = 8;
@@ -7,13 +7,13 @@ public class HW02_4108056005_5 extends ThreeSum{
     volatile static int _count;
     
     public static void main(String[] args) {
-//    	System.out.println("case5:");
-//    	HW02_4108056005_5 test = new HW02_4108056005_5();
-//    	int[] A = new RandomArray().readData();
-//		Stopwatch stopwatch = new Stopwatch();
-//		System.out.println("ThreeSum is zero: "+test.T_sum(A));
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
+    	System.out.println("case5:");
+    	HW02_4108056005_5 test = new HW02_4108056005_5();
+    	int[] A = new RandomArray().readData();
+		Stopwatch stopwatch = new Stopwatch();
+		System.out.println("ThreeSum is zero: "+test.T_sum(A));
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
 	}
 
     private static void merge_sort(int[] arr){

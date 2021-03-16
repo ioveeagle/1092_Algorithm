@@ -27,11 +27,11 @@ public class HW02_4108056005_4 extends ThreeSum {
 //		this.show(A);
 		
 		limit = this.binarySearch(A, 0, 0, this.A.length-1);	// 取第一個正數的位置: O(logN)
+		_count = 0;
 		
 		// 檢查陣列長度是否小於執行序數量，如果沒有就用執行序
 		if(limit >= threadNum) {
 			MultiThread[] mt = new MultiThread[threadNum];
-			_count = 0;
 			
 			// 將陣列切成八等分，分散給各個執行序執行
 			for(int tr=0; tr<threadNum; tr++) {
@@ -97,16 +97,16 @@ public class HW02_4108056005_4 extends ThreeSum {
 		return high;
 	}
 	
-	public int binarySearch_left(int[] A, int key, int l, int h) {
-		int low = l, high = h;
-		while(low+1 < high) {
-			int mid = (low+high)/2;
-			if(key < A[mid]) high = mid;
-			else if(key > A[mid]) low = mid;
-			else return mid;
-		}
-		return high;
-	}
+    public int binarySearch_left(int[] A, int key, int l, int h) {
+        int low = l, high = h;
+        while(low+1 < high) {
+            int mid = (low+high)/2;
+            if(key < A[mid]) high = mid;
+            else if(key > A[mid]) low = mid;
+            else return mid;
+        }
+        return high;
+    }
 	
 	private void merge_sort(int[] arr){
         int[] orderedArr = new int[arr.length];
@@ -142,9 +142,10 @@ public class HW02_4108056005_4 extends ThreeSum {
     	
     	public void run() {
     		int count = 0;
-    		for(int i = limit/threadNum*tr; i < limit/threadNum*(tr+1); i++) {
+    		int i_end = tr!=7 ? limit/threadNum*(tr+1) : limit;
+    		for(int i = limit/(threadNum)*tr; i < i_end; i++) {
     			int right = A.length-1;
-    			int left = binarySearch_left(A, -(A[i]+A[right]), i, A.length-1);	// left從合為零的數字開始，沒有的話就找比他大的下一個數字
+                int left = binarySearch_left(A, -(A[i]+A[right]), i, A.length-1);    // left從合為零的數字開始，沒有的話就找比他大的下一個數字
     			
     			// 一直夾擊直到左右標記交會: O(N)
     			while(left < right) {
