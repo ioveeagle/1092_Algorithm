@@ -1,5 +1,5 @@
 // case4 - sandwich algorithm + Thread: better than O(N^2)?
-// package hw02;
+package hw02;
 
 public class HW02_4108056005_4 extends ThreeSum {
 	
@@ -9,13 +9,13 @@ public class HW02_4108056005_4 extends ThreeSum {
 	int limit;
 	
 	public static void main(String[] args) {
-//		System.out.println("case4:");
-//		HW02_4108056005_4 test4 = new HW02_4108056005_4();
-//		int[] A = new RandomArray().readData();
-//		Stopwatch stopwatch = new Stopwatch();
-//		System.out.println("ThreeSum is zero: "+test4.T_sum(A));
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
+		System.out.println("case4:");
+		HW02_4108056005_4 test4 = new HW02_4108056005_4();
+		int[] A = new RandomArray().readData();
+		Stopwatch stopwatch = new Stopwatch();
+		System.out.println("ThreeSum is zero: "+test4.T_sum(A));
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
 	}
 	
 	@Override
