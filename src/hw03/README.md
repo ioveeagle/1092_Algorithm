@@ -1,5 +1,8 @@
 # HW03_hill finding
 
+[![hackmd-github-sync-badge](https://hackmd.io/CkReuzGVRXGJPjR5W3vDfw/badge)](https://hackmd.io/CkReuzGVRXGJPjR5W3vDfw)
+
+
 ###### tags: `演算法` `Java`
 
 ## 題目
