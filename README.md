@@ -9,9 +9,11 @@
 ## overview
 * [HW01_max and min](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw01)
 * [HW02_three sum](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw02)
+* [HW03_hill finding](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw03)
 
 > 希望演算法可以順利過關~
 
 好運貓貓~~
 
 ![](https://i.imgur.com/U7tXkC1.gif)
+
