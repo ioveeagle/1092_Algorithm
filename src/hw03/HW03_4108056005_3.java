@@ -1,11 +1,11 @@
 // case2: binary search: O(logN)
 package hw03;
 
-public class HW03_4108056005_2 extends HillFinding{
+public class HW03_4108056005_3 extends HillFinding{
 	public static void main(String[] args) 
 	{
-		System.out.println("case2:");
-		HW03_4108056005_2 test = new HW03_4108056005_2();
+		System.out.println("case3:");
+		HW03_4108056005_3 test = new HW03_4108056005_3();
 		int[] A = new TestDataGenerator().readData();
 		Stopwatch stopwatch = new Stopwatch();
 		System.out.println("hill is: "+test.H_Finding(A));
