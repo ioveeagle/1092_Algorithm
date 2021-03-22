@@ -37,6 +37,6 @@ public class HW03_4108056005_1 extends HillFinding{
 				return A.length-1-end;
 			}
 		}
-		return 0;
+		return -1;
 	}
 }
