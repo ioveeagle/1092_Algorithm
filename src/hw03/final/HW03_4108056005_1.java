@@ -1,12 +1,11 @@
-// case5: kashiwa
 //package hw03;
 
-public class HW03_4108056005_5 extends HillFinding
+public class HW03_4108056005_ extends HillFinding
 {
 	public static void main(String[] args) 
 	{
-//		System.out.println("case5:");
-//		HW03_4108056005_5 test = new HW03_4108056005_5();
+//		System.out.println("case1:");
+//		HW03_4108056005_1 test = new HW03_4108056005_1();
 //		int[] A = new TestDataGenerator().readData();
 //		Stopwatch stopwatch = new Stopwatch();
 //		System.out.println("hill is: "+test.H_Finding(A));
