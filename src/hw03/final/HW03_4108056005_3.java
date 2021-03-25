@@ -1,6 +1,6 @@
 //package hw03;
 
-public class HW03_4108056005_1 extends HillFinding
+public class HW03_4108056005_3 extends HillFinding
 {
 	public static void main(String[] args) 
 	{
