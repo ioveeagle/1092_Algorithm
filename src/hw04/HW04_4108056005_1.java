@@ -1,23 +1,23 @@
 // case1: find from edge: O(N/2)
-//package hw04;
+package hw04;
 
 public class HW04_4108056005_1 extends One_0k_rock 
 {
 	public static void main(String[] args) 
 	{
-//		System.out.println("case1:");
-//		HW04_4108056005_1 test = new HW04_4108056005_1();
-//		TestDataGenerator tsg = new TestDataGenerator();
-//		String[] str= tsg.readData();
-//		boolean[] ans = tsg.readAns();
-//		Stopwatch stopwatch = new Stopwatch();
-//		boolean[] res = test.one0k(str);		
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-//		test.checkAns(ans, res);
-//		test.show(ans);
-//		test.show(res);
+		System.out.println("case1:");
+		HW04_4108056005_1 test = new HW04_4108056005_1();
+		TestDataGenerator tsg = new TestDataGenerator();
+		String[] str= tsg.readData();
+		boolean[] ans = tsg.readAns();
+		Stopwatch stopwatch = new Stopwatch();
+		boolean[] res = test.one0k(str);		
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+		test.checkAns(ans, res);
+		test.show(ans);
+		test.show(res);
 	}
 	
 	@Override

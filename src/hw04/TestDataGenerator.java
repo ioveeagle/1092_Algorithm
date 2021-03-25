@@ -7,14 +7,7 @@ public class TestDataGenerator {
 	// 每 ctrl+F11 就產生一筆新測資
 	public static void main(String[] args) {
 		TestDataGenerator ra = new TestDataGenerator();
-		ra.createData(1000, 1000);	// 第一個參數是陣列長度，第二個測資是數值範圍(-n~n)
-		
-//		for(int i =0; i<10; i++)
-//		{
-//			System.out.println((int)(Math.random()*50)*2 + 1);	// 1~99
-//			System.out.println((int)(Math.random()*50)*2 + 2);	// 2~100
-//		}
-//		System.out.println(String.valueOf(false));
+		ra.createData(5000, 1000);	// 第一個參數是陣列長度，第二個測資是數值範圍(-n~n)
 	}
 	
 	// 產生新測資
