@@ -1,42 +1,40 @@
 // case3: find from mid+thread: O(N/2)
-//package hw04;
+package hw04;
 
 public class HW04_4108056005_3 extends One_0k_rock 
 {
 	static int threadNum = 8;
 	String[] str;
 	boolean[] ans;
-	int slen;
 	
 	public static void main(String[] args) 
 	{
-//		System.out.println("case3:");
-//		HW04_4108056005_3 test = new HW04_4108056005_3();
-//		TestDataGenerator tsg = new TestDataGenerator();
-//		String[] str= tsg.readData();
-//		boolean[] ans = tsg.readAns();
-//		Stopwatch stopwatch = new Stopwatch();
-//		boolean[] res = test.one0k(str);		
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-//		test.checkAns(ans, res);
-//		test.show(ans);
-//		test.show(res);
+		System.out.println("case3:");
+		HW04_4108056005_3 test = new HW04_4108056005_3();
+		TestDataGenerator tsg = new TestDataGenerator();
+		String[] str= tsg.readData();
+		boolean[] ans = tsg.readAns();
+		Stopwatch stopwatch = new Stopwatch();
+		boolean[] res = test.one0k(str);		
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+		test.checkAns(ans, res);
+		test.show(ans);
+		test.show(res);
 	}
 	
 	@Override
 	public boolean[] one0k(String[] str) 
 	{
 		this.str = str;
-		slen = str.length;
-		ans = new boolean[slen];
+		ans = new boolean[str.length];
 		
-		if(slen >= threadNum) 
+		if(str.length >= threadNum) 
 		{
 			MultiThread[] mt = new MultiThread[threadNum];
 			
-			// 將陣列切成八等分，分散給各個執行序執行
+			// split str to 8 slice, each run 1/8 str.
 			for(int tr=0; tr<threadNum; tr++) 
 			{
 				mt[tr] = new MultiThread(tr);
@@ -45,14 +43,14 @@ public class HW04_4108056005_3 extends One_0k_rock
 			
 			try
 			{
-	            for(int tr=0; tr<threadNum; tr++) mt[tr].join();	// 最後將所有執行序結果和併，並等待結束
+	            for(int tr=0; tr<threadNum; tr++) mt[tr].join();	// join all of thread, and wait to end
 	        }
 			catch(InterruptedException e) {}
 		}
 		else 
 		{
 			// no thread
-			for(int i=0; i<slen; i++)
+			for(int i=0; i<str.length; i++)
 			{
 				String s = str[i];
 				if(s.length()%2 == 0)
@@ -111,8 +109,8 @@ public class HW04_4108056005_3 extends One_0k_rock
     	
     	public void run() 
     	{
-    		int i_end = tr!=7 ? slen/threadNum*(tr+1) : slen;
-    		for(int i = slen/(threadNum)*tr; i < i_end; i++) 
+    		int i_end = tr!=7 ? str.length/threadNum*(tr+1) : str.length;
+    		for(int i = str.length/(threadNum)*tr; i < i_end; i++) 
     		{
     			String s = str[i];
     			if(s.length()%2 == 0)
