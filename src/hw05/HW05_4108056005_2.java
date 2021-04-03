@@ -1,17 +1,17 @@
 // case2_hashmap + slope + thread: O(1/2*N^2)
-package hw05;
+//package hw05;
 
 public class HW05_4108056005_2 extends LLK {
 	
 	public static void main(String[] args) 
 	{
-		HW05_4108056005_2 test = new HW05_4108056005_2();
-		int[][] array = TestDataGenerator.readData();
-		System.out.println("case2:");
-		Stopwatch stopwatch = new Stopwatch();
-		System.out.println(test.checkLLK(array));	
-		double time = stopwatch.elapsedTime();
-		System.out.println("elapsed time " + time);
+//		HW05_4108056005_2 test = new HW05_4108056005_2();
+//		int[][] array = TestDataGenerator.readData();
+//		System.out.println("case2:");
+//		Stopwatch stopwatch = new Stopwatch();
+//		System.out.println(test.checkLLK(array));	
+//		double time = stopwatch.elapsedTime();
+//		System.out.println("elapsed time " + time);
 	}
 	
 	volatile boolean ans;
