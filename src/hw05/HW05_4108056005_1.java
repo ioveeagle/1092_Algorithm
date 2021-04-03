@@ -1,19 +1,19 @@
 // case1_vertor: O(1/3*N^3)
-//package hw05;
+package hw05;
 
 public class HW05_4108056005_1 extends LLK
 {
 	public static void main(String[] args) 
 	{
-//		HW05_4108056005_1 test = new HW05_4108056005_1();
-//		int[][] array = TestDataGenerator.readData();
-//		System.out.println("case1:");
-//		Stopwatch stopwatch = new Stopwatch();
-//		System.out.println(test.checkLLK(array));	
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-////		test.show(array);
+		HW05_4108056005_1 test = new HW05_4108056005_1();
+		int[][] array = TestDataGenerator.readData();
+		System.out.println("case1:");
+		Stopwatch stopwatch = new Stopwatch();
+		System.out.println(test.checkLLK(array));	
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+//		test.show(array);
 	}
 	
 	@Override
