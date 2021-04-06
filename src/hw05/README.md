@@ -1,5 +1,8 @@
 # HW05_LLK
 
+[![hackmd-github-sync-badge](https://hackmd.io/5uAJy3JEQiugYyPJblppqQ/badge)](https://hackmd.io/5uAJy3JEQiugYyPJblppqQ)
+
+
 ###### tags: `演算法` `Java`
 
 ## 題目
@@ -45,6 +48,11 @@ HashMap有一對一之性質，因此適合來檢查是否存在重複值，如�
 ## 排名
 原本想說應該會很快的，結果超慢。前幾名不知道怎麼做的，太快了吧!
 
-這下得想想怎麼加速了:cry: 
+這下得想想怎麼加速了:cry:
 
 ![](https://i.imgur.com/lCbtDyj.png)
+
+04/16:  
+其實我也不知道該怎麼加速，後來我猜有可能共線的是放在測資的前面，所以我先將陣列sort一次，另外加上多執行序(雖然測資小沒快多少)，但希望今天下午6點結果出來有變快!
+
+
