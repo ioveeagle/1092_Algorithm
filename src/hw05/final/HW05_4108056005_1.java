@@ -1,4 +1,4 @@
-// case2_hashmap + deltaX & deltaY + thread32: O(1/2*N^2)
+// case2_hashmap + deltaX & deltaY + thread32 + sort first: O(1/2*N^2)
 //package hw05;
 
 public class HW05_4108056005_1 extends LLK 

@@ -14,64 +14,57 @@ public class HW05_4108056005_5 extends LLK
 //		System.out.println("elapsed time " + time);
 	}
 	
-	class Slot  // class for saving slope of the pair as linked list
+	class Entry  // class for hashmap entry
 	{
 		final double slope;
-		final Slot Next;
+		final Entry next;
 
-		public Slot(final double slope, final Slot Next) 
+		public Entry(final double slope, final Entry next) 
 		{
 			this.slope = slope;
-			this.Next = Next;
+			this.next = next;
 		}
 	}
 
-	final byte log_tNum = 5; // Binary logarithm of launch thread number
-	final Slot[][] HashTable = new Slot[1 << log_tNum][]; // Initialize 2^5=32 hash table
-	final Thread[] T = new Thread[HashTable.length - 1]; // Initialize 32-1=31 threads, one for main thread
-	volatile boolean result; // the result value. modifier volatile let us not to care synchronous problem
+	final byte log_tNum = 5;
+	final Entry[][] HashTable = new Entry[1 << log_tNum][];
+	final Thread[] T = new Thread[HashTable.length - 1];
+	volatile boolean result;
 
 	public boolean checkLLK(int[][] array) 
 	{
-		result = false; // reset the value, prevent same object-method calling
+		result = false;	// init result to be false
 
-		final int end = array.length - 1, tLen = T.length, freq = HashTable.length,
-				// get the closest power-of-2-number bigger than array.length, BUCKETS = 2^k, k in
-				// [0,32]
-				bNum = 1 << 32 - Integer.numberOfLeadingZeros(end), B = bNum - 1;
+		final int end = array.length - 1, tLen = T.length, freq = HashTable.length, bNum = 1 << 32 - Integer.numberOfLeadingZeros(end), B = bNum - 1;
 
-		for (byte ti = 0; ti < tLen; ++ti) { // start up all threads
-			final byte t = ti; // the variables pass to anonymous class must be final
-			T[t] = new Thread(() -> { // lambda expression for Runnable interface since Java 8
-				// start of each thread(algorithm same as below)
-				// threading by frequency: e.g. 0,32,64... 1,33,65... 2,34,66... ......
+		 // start up all threads
+		for (byte ti = 0; ti < tLen; ++ti) 
+		{
+			final byte t = ti;	// must be final
+			T[t] = new Thread(() -> {
+				// start of each thread
 				for (int i = end - t, j, bucket; i > -1; i -= freq) 
 				{
-					// (re-)set buckets for each i
-					for (HashTable[t] = new Slot[bNum], j = i - 1; j > -1;) 
+					for (HashTable[t] = new Entry[bNum], j = i - 1; j > -1;) 
 					{
-						// calculate the slope of the line construct by point i and j
+						// calculate the slope between point i and j
 						final double slope = (array[i][1] - array[j][1]) / (double) (array[i][0] - array[j--][0]);
 
-						// modulo for ONLY power-of-2-number: same as (hashcode&0x7fff_ffff)%bNum
-						// for keep the hash index in [0,BUCKETMUN]
 						bucket = Double.hashCode(slope) & B & 0x7fff_ffff;
 
-						// view through slots of the bucket, hash collisions occur if Solt have Next.
-						for (Slot Pivot = HashTable[t][bucket]; Pivot != null; Pivot = Pivot.Next) 
+						for (Entry Pivot = HashTable[t][bucket]; Pivot != null; Pivot = Pivot.next) 
 						{
-							// find three points in the same line
+							// same slope means three point is in one line
 							if (Pivot.slope == slope)
 								result = true;
 
-							// if other thread(s) or this thread found, end up the thread.
-							// the same instruction below is for the same reason.
+							// if other thread(s) or this thread found, end up the thread
 							if (result)
 								return;
 						}
 
-						// put slope into the foremost slot of the bucket
-						HashTable[t][bucket] = new Slot(slope, HashTable[t][bucket]);
+						// put slope into the hashmap
+						HashTable[t][bucket] = new Entry(slope, HashTable[t][bucket]);
 
 						if (result)
 							return;
@@ -81,8 +74,8 @@ public class HW05_4108056005_5 extends LLK
 				}
 				// end of each thread
 			});
-			T[t].setDaemon(true); // let threads end up while main thread return ture
-			T[t].start(); // launch threads
+			T[t].setDaemon(true);
+			T[t].start();
 			if (result)
 				return true;
 		} // end of start up threads
@@ -90,14 +83,14 @@ public class HW05_4108056005_5 extends LLK
 		// start algorithm to main thread
 		for (int i = end - tLen, j, bucket; i > -1; i -= freq) 
 		{
-			for (HashTable[tLen] = new Slot[bNum], j = i - 1; j > -1;) 
+			for (HashTable[tLen] = new Entry[bNum], j = i - 1; j > -1;) 
 			{
 				final double slope = (array[i][1] - array[j][1]) / (double) (array[i][0] - array[j--][0]);
 				bucket = Double.hashCode(slope) & B & 0x7fff_ffff;
-				for (Slot Pivot = HashTable[tLen][bucket]; Pivot != null; Pivot = Pivot.Next)
+				for (Entry Pivot = HashTable[tLen][bucket]; Pivot != null; Pivot = Pivot.next)
 					if (Pivot.slope == slope || result)
 						return true;
-				HashTable[tLen][bucket] = new Slot(slope, HashTable[tLen][bucket]);
+				HashTable[tLen][bucket] = new Entry(slope, HashTable[tLen][bucket]);
 			}
 			if (result)
 				return true;
@@ -106,8 +99,9 @@ public class HW05_4108056005_5 extends LLK
 
 		try 
 		{
+			// join all threads, and wait program end
 			for (final Thread t : T) 
-			{ // join all threads
+			{
 				if (result)
 					return true;
 				t.join();

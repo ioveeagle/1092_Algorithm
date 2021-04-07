@@ -1,17 +1,17 @@
-// case2_hashmap + deltaX & deltaY + thread32: O(1/2*N^2)
-package hw05;
+// case2_hashmap + deltaX & deltaY + thread32 + no sort first: O(1/2*N^2)
+//package hw05;
 
 public class HW05_4108056005_2 extends LLK 
 {
 	public static void main(String[] args) 
 	{
-		HW05_4108056005_2 test = new HW05_4108056005_2();
-		int[][] array = TestDataGenerator.readData();
-		System.out.println("case2:");
-		Stopwatch stopwatch = new Stopwatch();
-		System.out.println(test.checkLLK(array));	
-		double time = stopwatch.elapsedTime();
-		System.out.println("elapsed time " + time);
+//		HW05_4108056005_2 test = new HW05_4108056005_2();
+//		int[][] array = TestDataGenerator.readData();
+//		System.out.println("case2:");
+//		Stopwatch stopwatch = new Stopwatch();
+//		System.out.println(test.checkLLK(array));	
+//		double time = stopwatch.elapsedTime();
+//		System.out.println("elapsed time " + time);
 	}
 	
 	int[][] array;
@@ -23,8 +23,6 @@ public class HW05_4108056005_2 extends LLK
 
 	public boolean checkLLK(int[][] array) 
 	{
-		sort(array);	// merge sort: O(NlogN)
-		
 		ans = false;
 		this.array = array;
 		len = array.length;
@@ -184,43 +182,4 @@ public class HW05_4108056005_2 extends LLK
     {
         return b==0 ? a : gcd(b, a%b);
     }
-	
-	public static void sort(int[][] a)
-	{
-		int[][] aux = new int[a.length][2];
-		sort(a, aux, 0, a.length-1);
-	}
-    
-    private static void sort(int[][] a, int[][] aux, int lo, int hi)
-	{
-		if(hi <= lo) return;
-		int mid = lo + (hi-lo)/2;
-		sort(a, aux, lo, mid);
-		sort(a, aux, mid+1, hi);
-		merge(a, aux, lo, mid, hi);
-	}
-    
-    private static void merge(int[][] a, int[][] aux, int lo, int mid, int hi)
-	{
-		for(int k = lo; k <= hi; k++) aux[k] = a[k];
-		
-		int i = lo, j = mid+1;
-		for(int k = lo; k <= hi; k++)
-		{
-			if(i > mid) a[k] = aux[j++];
-			else if(j > hi) a[k] = aux[i++];
-			else if(less(aux[i], aux[j])) a[k] = aux[i++];
-			else a[k] = aux[j++];
-		}
-	}
-    
-    private static boolean less(int[] i, int[] j)
-	{
-		if(i[0] < j[0]) return true;
-		else if(i[0] > j[0]) return false;
-		else
-			if(i[1] < j[1]) return true;
-			else if(i[1] > j[1]) return false;
-			else return true;
-	}
 }
