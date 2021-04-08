@@ -1,8 +1,8 @@
 # 1092_Algorithm
 
-[![hackmd-github-sync-badge](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA/badge)](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA)
-
 > 1092_演算法作業
+
+[![hackmd-github-sync-badge](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA/badge)](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA)
 
 ###### tags: `演算法` `Java`
 
