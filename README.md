@@ -12,6 +12,7 @@
 * [HW03_hill finding](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw03)
 * [HW04_one 0k rock](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw04)
 * [HW05_LLK](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw05)
+* [HW06_Dessert Desert](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw06)
 
 > 希望演算法可以順利過關~
 
