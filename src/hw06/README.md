@@ -1,4 +1,7 @@
-# HW06_Dessert_Desert
+# HW06_Dessert Desert
+
+[![hackmd-github-sync-badge](https://hackmd.io/zCEiqRp5Qzub7BzPvm32wg/badge)](https://hackmd.io/zCEiqRp5Qzub7BzPvm32wg)
+
 
 ###### tags: `演算法` `Java`
 
@@ -7,6 +10,8 @@
 測資是一個二維陣列，裡面好幾個整數陣列(未排序)，請求出每個陣列符合條件下最多的區塊(block)數。
 
 條件為: 每一個block裡面我們將他視作是已經排序好的，此時整個陣列也要是排序好的。
+
+(跟題目名稱好像沒有任何關係!??)
 
 ## 解題想法
 好了啦，我知道題目看起來很難懂，但實際想過後其實還好，我用簡單的方式說明:
@@ -23,7 +28,7 @@
 
 既然知道這個線索了，那就開始來講演算法吧!
 
-### go back algorithm(自己取的XD)
+### go back algorithm
 第一次從頭掃到尾，並且記錄**每個元素的最大及最小值**。  
 
 會遇到三種狀況:  
@@ -52,6 +57,17 @@
 
 而改變rmin是因為下一個block也要做一樣的事情。
 
+還要多考慮到沒有切的情況，沒有切代表 A 沒有合乎條件，因此 A 必須和 B merge，merge有兩種:  
+1. 如果A的min比較小，則合併後的min為A的min
+2. 如果B的min比較小，則合併後的min為B的min
+
+總之就是合併後的min(rmin)取較小的。  
+當初Wrong Ans就是少考慮這個，想半天找不出反例，最後終於找到一個: (3, 5, 2, 9, 4)
+
+![](https://i.imgur.com/Gvc8FrE.jpg)
+
+![](https://i.imgur.com/NEVOG76.jpg)
+
 這個方法只需來回跑一遍陣列，顯然複雜度為**O(2N)**。
 
 特別感謝 *@林新紘* 提供其演算法，真的幾乎都他想的，我只是吸收理解後寫成筆記。
@@ -64,4 +80,4 @@
 5. go back algorithm + thread32 + static + volatile
 
 ## 排名
-飛起來~~~
+wrong answer
