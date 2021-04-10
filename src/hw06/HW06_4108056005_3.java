@@ -96,10 +96,14 @@ public class HW06_4108056005_3 extends Dessert_Desert
 				 * and when they sorted respectively, all part is sorted, too.
 				 * We count plus 1 because this case is the shortest block.
 				 */
-				if(data[j][0] <= rmin)
+				if(data[j][0] <= rmin)	// can't merge, so must be one block
 				{
 					count++;
 					rmin = data[j][1];	// new min of the next block
+				}
+				else
+				{
+					rmin = Math.min(rmin, data[j][1]);	// merge might get the smaller min.
 				}
 			}
 			count++;	// the last block is included
