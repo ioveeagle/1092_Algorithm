@@ -1,18 +1,28 @@
-// case4_go back algorithm + thread32 + no static: O(2N)
+// case4_go back algorithm + thread16 + function: O(2N)
 //package hw06;
 
 public class HW06_4108056005_4 extends Dessert_Desert
 {
+	static int[][] inputArr;
+	static int[] result;
+	int tNum = 16;
+	byte logtNum = 4;
+	MultiThread[] mt;
+	
+	public HW06_4108056005_4() 
+	{
+		mt = new MultiThread[tNum];
+		
+		for(int tr=0; tr<tNum; tr++) 
+		{
+			mt[tr] = new MultiThread(tr);
+		}
+	}
+	
 	public static void main(String[] args) 
 	{
 //		HW06_4108056005_4 test = new HW06_4108056005_4();
-//		int[][] array = {{2, 1, 3, 2},
-//				{2, 1, 2, 4, 3, 3, 4},
-//				{1, 1, 1, 1, 1, 1, 1},
-//				{1, 3, 5, 7, 9},
-//				{5, 4, 3, 2, 1},
-//				{4, 2, 6, 5, 5},
-//				{2, 1, 2, 3, 2, 4, 3, 5, 3, 4, 6, 7, 8, 5, 10, 9}};
+//		int[][] array = new int[8000][10000];
 //		System.out.println("case4:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] result = test.maxBlocks(array);
@@ -26,11 +36,6 @@ public class HW06_4108056005_4 extends Dessert_Desert
 //		System.out.println();
 	}
 	
-	int[][] inputArr;
-	int[] result;
-	int tNum = 32;
-	Thread[] t = new Thread[tNum];
-	
 	@Override
 	public int[] maxBlocks(int[][] inputArr) 
 	{
@@ -40,12 +45,9 @@ public class HW06_4108056005_4 extends Dessert_Desert
 		// if array length is larger than the number of threads
 		if (inputArr.length > tNum*4) 
 		{
-			MultiThread[] mt = new MultiThread[tNum];
-			
 			// split array to 8 pieces
 			for(int tr=0; tr<tNum; tr++) 
 			{
-				mt[tr] = new MultiThread(tr);
 				mt[tr].start();
 			}
 			
@@ -53,7 +55,8 @@ public class HW06_4108056005_4 extends Dessert_Desert
 			{
 	            for(int tr=0; tr<tNum; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end
+	                mt[tr].join();	// merge all thread and wait end	0.037
+//	                mt[tr].sleep(1);
 	            }
 	        }
 			catch(InterruptedException e) {}
@@ -66,7 +69,7 @@ public class HW06_4108056005_4 extends Dessert_Desert
 		return result;
 	}
 	
-	private void countMax(int start, int end)
+	private static void countMax(int start, int end)
 	{
 		for(int i = start; i < end; i++)	// each integers array
 		{
@@ -123,8 +126,10 @@ public class HW06_4108056005_4 extends Dessert_Desert
     	
     	public void run() 
     	{
-    		int start = inputArr.length * tr / tNum;
-			int end = inputArr.length * (tr + 1) / tNum;
+    		int start = inputArr.length * tr >> logtNum;
+			int end = inputArr.length * (tr + 1) >> logtNum;
+			
+//			System.out.println("thread="+tr+", start="+start+", end="+end);
 			
 			countMax(start, end);
 	    }

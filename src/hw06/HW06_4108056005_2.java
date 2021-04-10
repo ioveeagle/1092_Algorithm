@@ -1,12 +1,28 @@
-// case2_go back algorithm + thread8: O(2N)
+// case2_go back algorithm + thread8 + function: O(2N)
 //package hw06;
 
 public class HW06_4108056005_2 extends Dessert_Desert
 {
+	static int[][] inputArr;
+	static int[] result;
+	int tNum = 8;
+	byte logtNum = 3;
+	MultiThread[] mt;
+	
+	public HW06_4108056005_2() 
+	{
+		mt = new MultiThread[tNum];
+		
+		for(int tr=0; tr<tNum; tr++) 
+		{
+			mt[tr] = new MultiThread(tr);
+		}
+	}
+	
 	public static void main(String[] args) 
 	{
 //		HW06_4108056005_2 test = new HW06_4108056005_2();
-//		int[][] array = {{3, 5, 2, 9, 4}};
+//		int[][] array = new int[8000][10000];
 //		System.out.println("case2:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] result = test.maxBlocks(array);
@@ -20,11 +36,6 @@ public class HW06_4108056005_2 extends Dessert_Desert
 //		System.out.println();
 	}
 	
-	static int[][] inputArr;
-	static int[] result;
-	int tNum = 8;
-	Thread[] t = new Thread[tNum];
-	
 	@Override
 	public int[] maxBlocks(int[][] inputArr) 
 	{
@@ -34,12 +45,9 @@ public class HW06_4108056005_2 extends Dessert_Desert
 		// if array length is larger than the number of threads
 		if (inputArr.length > tNum*4) 
 		{
-			MultiThread[] mt = new MultiThread[tNum];
-			
 			// split array to 8 pieces
 			for(int tr=0; tr<tNum; tr++) 
 			{
-				mt[tr] = new MultiThread(tr);
 				mt[tr].start();
 			}
 			
@@ -47,7 +55,8 @@ public class HW06_4108056005_2 extends Dessert_Desert
 			{
 	            for(int tr=0; tr<tNum; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end
+	                mt[tr].join();	// merge all thread and wait end	0.037
+//	                mt[tr].sleep(1);
 	            }
 	        }
 			catch(InterruptedException e) {}
@@ -117,8 +126,10 @@ public class HW06_4108056005_2 extends Dessert_Desert
     	
     	public void run() 
     	{
-    		int start = inputArr.length * tr / tNum;
-			int end = inputArr.length * (tr + 1) / tNum;
+    		int start = inputArr.length * tr >> logtNum;
+			int end = inputArr.length * (tr + 1) >> logtNum;
+			
+//			System.out.println("thread="+tr+", start="+start+", end="+end);
 			
 			countMax(start, end);
 	    }

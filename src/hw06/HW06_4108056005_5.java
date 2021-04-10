@@ -1,18 +1,28 @@
-// case5_go back algorithm + thread32 + static + volatile: O(2N)
+// case5_go back algorithm + thread32 + function: O(2N)
 //package hw06;
 
 public class HW06_4108056005_5 extends Dessert_Desert
 {
+	static int[][] inputArr;
+	static int[] result;
+	int tNum = 32;
+	byte logtNum = 5;
+	MultiThread[] mt;
+	
+	public HW06_4108056005_5() 
+	{
+		mt = new MultiThread[tNum];
+		
+		for(int tr=0; tr<tNum; tr++) 
+		{
+			mt[tr] = new MultiThread(tr);
+		}
+	}
+	
 	public static void main(String[] args) 
 	{
 //		HW06_4108056005_5 test = new HW06_4108056005_5();
-//		int[][] array = {{2, 1, 3, 2},
-//				{2, 1, 2, 4, 3, 3, 4},
-//				{1, 1, 1, 1, 1, 1, 1},
-//				{1, 3, 5, 7, 9},
-//				{5, 4, 3, 2, 1},
-//				{4, 2, 6, 5, 5},
-//				{2, 1, 2, 3, 2, 4, 3, 5, 3, 4, 6, 7, 8, 5, 10, 9}};
+//		int[][] array = new int[8000][10000];
 //		System.out.println("case5:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] result = test.maxBlocks(array);
@@ -26,11 +36,6 @@ public class HW06_4108056005_5 extends Dessert_Desert
 //		System.out.println();
 	}
 	
-	static int[][] inputArr;
-	static volatile int[] result;
-	int tNum = 32;
-	Thread[] t = new Thread[tNum];
-	
 	@Override
 	public int[] maxBlocks(int[][] inputArr) 
 	{
@@ -40,12 +45,9 @@ public class HW06_4108056005_5 extends Dessert_Desert
 		// if array length is larger than the number of threads
 		if (inputArr.length > tNum*4) 
 		{
-			MultiThread[] mt = new MultiThread[tNum];
-			
 			// split array to 8 pieces
 			for(int tr=0; tr<tNum; tr++) 
 			{
-				mt[tr] = new MultiThread(tr);
 				mt[tr].start();
 			}
 			
@@ -53,7 +55,8 @@ public class HW06_4108056005_5 extends Dessert_Desert
 			{
 	            for(int tr=0; tr<tNum; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end
+	                mt[tr].join();	// merge all thread and wait end	0.037
+//	                mt[tr].sleep(1);
 	            }
 	        }
 			catch(InterruptedException e) {}
@@ -123,8 +126,10 @@ public class HW06_4108056005_5 extends Dessert_Desert
     	
     	public void run() 
     	{
-    		int start = inputArr.length * tr / tNum;
-			int end = inputArr.length * (tr + 1) / tNum;
+    		int start = inputArr.length * tr >> logtNum;
+			int end = inputArr.length * (tr + 1) >> logtNum;
+			
+//			System.out.println("thread="+tr+", start="+start+", end="+end);
 			
 			countMax(start, end);
 	    }
