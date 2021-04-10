@@ -73,11 +73,18 @@
 特別感謝 *@林新紘* 提供其演算法，真的幾乎都他想的，我只是吸收理解後寫成筆記。
 
 ## 版本
-1. go back algorithm
-2. go back algorithm + thread8
-3. go back algorithm + thread32 + static
-4. go back algorithm + thread32 + no static
-5. go back algorithm + thread32 + static + volatile
+1. go back algorithm: 33
+2. go back algorithm + thread8: 26
+3. go back algorithm + thread32 + static: 28
+4. go back algorithm + thread32 + no static: 31
+5. go back algorithm + thread32 + static + volatile: 32
+
+static + no volatile 比較快
+
+1. go back algorithm: 
+2. go back algorithm + thread8 + function: 
+3. go back algorithm + thread8 + no function: 
+4. go back algorithm + thread16 + function: 
+5. go back algorithm + thread32 + function: 
 
 ## 排名
-wrong answer
