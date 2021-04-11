@@ -81,10 +81,19 @@
 
 static + no volatile 比較快
 
+1. go back algorithm: 42
+2. go back algorithm + thread8 + function: 37
+3. go back algorithm + thread8 + no function: 38
+4. go back algorithm + thread16 + function: 35
+5. go back algorithm + thread32 + function: 43
+
+function反而比較快?? 但沒差很多，我覺得只是誤差
+
 1. go back algorithm: 
-2. go back algorithm + thread8 + function: 
-3. go back algorithm + thread8 + no function: 
-4. go back algorithm + thread16 + function: 
-5. go back algorithm + thread32 + function: 
+2. go back algorithm + thread8: 
+3. go back algorithm + thread8 + mod: 
+4. go back algorithm + thread16 + mod: 
+5. go back algorithm + thread7 + main + mod: 
+
 
 ## 排名
