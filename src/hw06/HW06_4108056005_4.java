@@ -1,12 +1,12 @@
-// case4_go back algorithm + thread16 + function: O(2N)
-//package hw06;
+// case4_go back algorithm + thread8 + mod: O(2N)
+package hw06;
 
 public class HW06_4108056005_4 extends Dessert_Desert
 {
 	static int[][] inputArr;
 	static int[] result;
-	int tNum = 16;
-	byte logtNum = 4;
+	byte tNum = 8;
+	byte logtNum = 3;
 	MultiThread[] mt;
 	
 	public HW06_4108056005_4() 
@@ -21,14 +21,14 @@ public class HW06_4108056005_4 extends Dessert_Desert
 	
 	public static void main(String[] args) 
 	{
-//		HW06_4108056005_4 test = new HW06_4108056005_4();
-//		int[][] array = new int[8000][10000];
-//		System.out.println("case4:");
-//		Stopwatch stopwatch = new Stopwatch();
-//		int[] result = test.maxBlocks(array);
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
+		HW06_4108056005_4 test = new HW06_4108056005_4();
+		int[][] array = new int[16000][10000];
+		System.out.println("case4:");
+		Stopwatch stopwatch = new Stopwatch();
+		int[] result = test.maxBlocks(array);
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
 //		for(int i = 0; i < result.length; i++)
 //		{
 //			System.out.print(result[i]+", ");
@@ -63,56 +63,56 @@ public class HW06_4108056005_4 extends Dessert_Desert
 		} 
 		else 
 		{
-			countMax(0, inputArr.length);
+			for(int i = 0; i < inputArr.length; i++)
+			{
+				countMax(i);
+			}
 		}
 		
 		return result;
 	}
 	
-	private static void countMax(int start, int end)
+	private static void countMax(int i)
 	{
-		for(int i = start; i < end; i++)	// each integers array
+		int[][] data = new int[inputArr[i].length][2];	// 0 is max, 1 is min
+		int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+		for(int j = 0; j < inputArr[i].length; j++)	// each element in array
 		{
-			int[][] data = new int[inputArr[i].length][2];	// 0 is max, 1 is min
-			int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
-			for(int j = 0; j < inputArr[i].length; j++)	// each element in array
+			if(inputArr[i][j] >= max)	// if next element is bigger than left max
 			{
-				if(inputArr[i][j] >= max)	// if next element is bigger than left max
-				{
-					max = inputArr[i][j];
-					min = inputArr[i][j];
-				}
-				if(inputArr[i][j] < min)	// if next element is smaller than left min
-				{
-					min = inputArr[i][j];
-				}
-				data[j][0] = max;	// put max of each element
-				data[j][1] = min;	// put min of each element
+				max = inputArr[i][j];
+				min = inputArr[i][j];
 			}
-			// show(i, data);
-			
-			int rmin = data[inputArr[i].length-1][1], count = 0;	// rmin is the min value from right
-			for(int j = inputArr[i].length-2; j >=0; j--)
+			if(inputArr[i][j] < min)	// if next element is smaller than left min
 			{
-				/* if rmin is not smaller than the max of this element, it means 
-				 * min of right part is larger or equal to the max of left part, 
-				 * and when they sorted respectively, all part is sorted, too.
-				 * We count plus 1 because this case is the shortest block.
-				 */
-				if(data[j][0] <= rmin)	// can't merge, so must be one block
-				{
-					count++;
-					rmin = data[j][1];	// new min of the next block
-				}
-				else
-				{
-					rmin = Math.min(rmin, data[j][1]);	// merge might get the smaller min.
-				}
+				min = inputArr[i][j];
 			}
-			count++;	// the last block is included
-			
-			result[i] = count;
+			data[j][0] = max;	// put max of each element
+			data[j][1] = min;	// put min of each element
 		}
+		// show(i, data);
+		
+		int rmin = data[inputArr[i].length-1][1], count = 0;	// rmin is the min value from right
+		for(int j = inputArr[i].length-2; j >=0; j--)
+		{
+			/* if rmin is not smaller than the max of this element, it means 
+			 * min of right part is larger or equal to the max of left part, 
+			 * and when they sorted respectively, all part is sorted, too.
+			 * We count plus 1 because this case is the shortest block.
+			 */
+			if(data[j][0] <= rmin)	// can't merge, so must be one block
+			{
+				count++;
+				rmin = data[j][1];	// new min of the next block
+			}
+			else
+			{
+				rmin = Math.min(rmin, data[j][1]);	// merge might get the smaller min.
+			}
+		}
+		count++;	// the last block is included
+		
+		result[i] = count;
 	}
 	
 	class MultiThread extends Thread 
@@ -126,12 +126,12 @@ public class HW06_4108056005_4 extends Dessert_Desert
     	
     	public void run() 
     	{
-    		int start = inputArr.length * tr >> logtNum;
-			int end = inputArr.length * (tr + 1) >> logtNum;
-			
-//			System.out.println("thread="+tr+", start="+start+", end="+end);
-			
-			countMax(start, end);
+    		for(int i = tr; i < inputArr.length; i += tNum)
+    		{
+//    			System.out.println("thread="+tr+", i="+i);
+    			
+    			countMax(i);
+    		}
 	    }
 	}
 	
