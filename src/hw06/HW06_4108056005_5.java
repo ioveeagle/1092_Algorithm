@@ -1,19 +1,20 @@
-// case4_go back algorithm + thread8 + mod: O(2N)
-package hw06;
+// case5_go back algorithm + thread7 + main + mod: O(2N)
+//package hw06;
 
 public class HW06_4108056005_5 extends Dessert_Desert
 {
 	static int[][] inputArr;
 	static int[] result;
-	byte tNum = 16;
-	byte logtNum = 4;
+	static int arrLen;
+	byte tNum = 8;
+	byte logtNum = 3;
 	MultiThread[] mt;
 	
 	public HW06_4108056005_5() 
 	{
-		mt = new MultiThread[tNum];
+		mt = new MultiThread[tNum-1];
 		
-		for(int tr=0; tr<tNum; tr++) 
+		for(int tr = 0; tr < tNum-1; tr++) 
 		{
 			mt[tr] = new MultiThread(tr);
 		}
@@ -21,13 +22,13 @@ public class HW06_4108056005_5 extends Dessert_Desert
 	
 	public static void main(String[] args) 
 	{
-		HW06_4108056005_5 test = new HW06_4108056005_5();
-		int[][] array = new int[16000][10000];
-		System.out.println("case5:");
-		Stopwatch stopwatch = new Stopwatch();
-		int[] result = test.maxBlocks(array);
-		double time = stopwatch.elapsedTime();
-		System.out.println("elapsed time " + time);
+//		HW06_4108056005_5 test = new HW06_4108056005_5();
+//		int[][] array = new int[16000][10000];
+//		System.out.println("case5:");
+//		Stopwatch stopwatch = new Stopwatch();
+//		int[] result = test.maxBlocks(array);
+//		double time = stopwatch.elapsedTime();
+//		System.out.println("elapsed time " + time);
 		
 //		for(int i = 0; i < result.length; i++)
 //		{
@@ -40,30 +41,38 @@ public class HW06_4108056005_5 extends Dessert_Desert
 	public int[] maxBlocks(int[][] inputArr) 
 	{
 		this.inputArr = inputArr;
-		result = new int[inputArr.length];
+		arrLen = inputArr.length;
+		result = new int[arrLen];
 		
 		// if array length is larger than the number of threads
-		if (inputArr.length > tNum*4) 
+		if (arrLen > tNum*4) 
 		{
-			// split array to 8 pieces
-			for(int tr=0; tr<tNum; tr++) 
+			// split array to 7 pieces
+			for(int tr=0; tr < tNum-1; tr++) 
 			{
 				mt[tr].start();
 			}
 			
+			// use main thread
+    		for(int i = tNum-1; i < arrLen; i += tNum)
+    		{
+//    			System.out.println("main thread, i="+i);
+    			
+    			countMax(i);
+    		}
+			
 			try
 			{
-	            for(int tr=0; tr<tNum; tr++) 
+	            for(int tr=0; tr < tNum-1; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end	0.037
-//	                mt[tr].sleep(1);
+	                mt[tr].join();	// merge all thread and wait end
 	            }
 	        }
 			catch(InterruptedException e) {}
 		} 
 		else 
 		{
-			for(int i = 0; i < inputArr.length; i++)
+			for(int i = 0; i < arrLen; i++)
 			{
 				countMax(i);
 			}
@@ -92,7 +101,7 @@ public class HW06_4108056005_5 extends Dessert_Desert
 		}
 		// show(i, data);
 		
-		int rmin = data[inputArr[i].length-1][1], count = 0;	// rmin is the min value from right
+		int rmin = data[inputArr[i].length-1][1], count = 1;	// rmin is the min value from right
 		for(int j = inputArr[i].length-2; j >=0; j--)
 		{
 			/* if rmin is not smaller than the max of this element, it means 
@@ -107,10 +116,9 @@ public class HW06_4108056005_5 extends Dessert_Desert
 			}
 			else
 			{
-				rmin = Math.min(rmin, data[j][1]);	// merge might get the smaller min.
+				rmin = data[j][1] < rmin ? data[j][1] : rmin;	// merge might get the smaller min.
 			}
 		}
-		count++;	// the last block is included
 		
 		result[i] = count;
 	}
@@ -126,7 +134,7 @@ public class HW06_4108056005_5 extends Dessert_Desert
     	
     	public void run() 
     	{
-    		for(int i = tr; i < inputArr.length; i += tNum)
+    		for(int i = tr; i < arrLen; i += tNum)
     		{
 //    			System.out.println("thread="+tr+", i="+i);
     			

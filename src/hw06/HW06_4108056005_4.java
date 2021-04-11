@@ -1,12 +1,12 @@
-// case4_go back algorithm + thread8 + mod: O(2N)
-package hw06;
+// case4_go back algorithm + thread16 + mod: O(2N)
+//package hw06;
 
 public class HW06_4108056005_4 extends Dessert_Desert
 {
 	static int[][] inputArr;
 	static int[] result;
-	byte tNum = 8;
-	byte logtNum = 3;
+	byte tNum = 16;
+	byte logtNum = 4;
 	MultiThread[] mt;
 	
 	public HW06_4108056005_4() 
@@ -21,13 +21,13 @@ public class HW06_4108056005_4 extends Dessert_Desert
 	
 	public static void main(String[] args) 
 	{
-		HW06_4108056005_4 test = new HW06_4108056005_4();
-		int[][] array = new int[16000][10000];
-		System.out.println("case4:");
-		Stopwatch stopwatch = new Stopwatch();
-		int[] result = test.maxBlocks(array);
-		double time = stopwatch.elapsedTime();
-		System.out.println("elapsed time " + time);
+//		HW06_4108056005_4 test = new HW06_4108056005_4();
+//		int[][] array = new int[16000][10000];
+//		System.out.println("case4:");
+//		Stopwatch stopwatch = new Stopwatch();
+//		int[] result = test.maxBlocks(array);
+//		double time = stopwatch.elapsedTime();
+//		System.out.println("elapsed time " + time);
 		
 //		for(int i = 0; i < result.length; i++)
 //		{
