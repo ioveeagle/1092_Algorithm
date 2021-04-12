@@ -6,6 +6,8 @@
 
 ###### tags: `演算法` `Java`
 
+**為了提升開源風氣，我也把我的演算法作業也改成公開的了。**
+
 ## overview
 * [HW01_max and min](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw01)
 * [HW02_three sum](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw02)
