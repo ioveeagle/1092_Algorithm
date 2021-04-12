@@ -89,11 +89,23 @@ static + no volatile 比較快
 
 function反而比較快?? 但沒差很多，我覺得只是誤差
 
+1. go back algorithm: 81
+2. go back algorithm + thread8: 77
+3. go back algorithm + thread8 + mod: 74
+4. go back algorithm + thread16 + mod: 73
+5. go back algorithm + thread7 + main + mod: 76
+
+16執行序比較快不意外，但分配主執行序版(5)表現其實還不錯。
+
 1. go back algorithm: 
 2. go back algorithm + thread8: 
-3. go back algorithm + thread8 + mod: 
-4. go back algorithm + thread16 + mod: 
-5. go back algorithm + thread7 + main + mod: 
+3. go back algorithm + thread8 + function: 
+4. go back algorithm + thread8 + function + mod: 
+5. go back algorithm + thread7 + function + main + mod: 
 
+加速重點:  
+* 變數盡量全用全域的static
+* 不要在程式中產生新的陣列
+* function好看又比較快
 
 ## 排名
