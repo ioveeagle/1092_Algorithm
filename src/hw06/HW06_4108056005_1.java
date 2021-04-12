@@ -6,7 +6,7 @@ public class HW06_4108056005_1 extends Dessert_Desert
 	public static void main(String[] args) 
 	{
 //		HW06_4108056005_1 test = new HW06_4108056005_1();
-//		int[][] array = {{3, 5, 2, 9, 4}};
+//		int[][] array = new int[8000][10000];
 //		System.out.println("case1:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] result = test.maxBlocks(array);
@@ -20,55 +20,62 @@ public class HW06_4108056005_1 extends Dessert_Desert
 //		System.out.println();
 	}
 	
+	static int len, arr_len;
+	static int[] min = new int[100000];
+	static int[] max = new int[100000];
+	static int[] ans;
+	static int[] arr;
+	
 	@Override
 	public int[] maxBlocks(int[][] inputArr) 
 	{
-		int[] result = new int[inputArr.length];
+		arr_len = inputArr.length;
+		ans = new int[arr_len];
 		
-		for(int i = 0; i < inputArr.length; i++)	// each integers array
+		for(int i = 0; i < arr_len; i++)	// each integers array
 		{
-			int[][] data = new int[inputArr[i].length][2];	// 0 is max, 1 is min
-			int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
-			for(int j = 0; j < inputArr[i].length; j++)	// each element in array
+			arr = inputArr[i];
+			len = arr.length;
+			int top = 0;		// top of max and min stack
+			min[0] = max[0] = arr[0];
+			
+			for(int j = 1; j < len; j++)	// each element in array
 			{
-				if(inputArr[i][j] >= max)	// if next element is bigger than left max
+				if(arr[j] >= max[top])	// if next element is bigger than left max
 				{
-					max = inputArr[i][j];
-					min = inputArr[i][j];
+					top++;
+					max[top] = min[top] = arr[j];
 				}
-				if(inputArr[i][j] < min)	// if next element is smaller than left min
+				else if(arr[j] < min[top])	// if next element is smaller than left min
 				{
-					min = inputArr[i][j];
+					min[top] = arr[j];
 				}
-				data[j][0] = max;	// put max of each element
-				data[j][1] = min;	// put min of each element
 			}
 //			show(i, data);
 			
-			int rmin = data[inputArr[i].length-1][1], count = 0;	// rmin is the min value from right
-			for(int j = inputArr[i].length-2; j >= 0; j--)
+			int rmin = min[top], count = 1;	// rmin is the min value from right
+			for(top--; top >= 0; top--)
 			{
 				/* if rmin is not smaller than the max of this element, it means 
 				 * min of right part is larger or equal to the max of left part, 
 				 * and when they sorted respectively, all part is sorted, too.
 				 * We count plus 1 because this case is the shortest block.
 				 */
-				if(data[j][0] <= rmin)	// can't merge, so must be one block
+				if(max[top] <= rmin)	// can't merge, so must be one block
 				{
 					count++;
-					rmin = data[j][1];	// new min of the next block
+					rmin = min[top];	// new min of the next block
 				}
-				else
+				else if(min[top] < rmin)
 				{
-					rmin = Math.min(rmin, data[j][1]);	// merge might get the smaller min.
+					rmin = min[top];	// merge might get the smaller min.
 				}
 			}
-			count++;	// the last block is included
 			
-			result[i] = count;
+			ans[i] = count;
 		}
 		
-		return result;
+		return ans;
 	}
 	
 	private static void show(int k, int[][] a)
