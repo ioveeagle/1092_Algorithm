@@ -1,11 +1,11 @@
 // case2_go back algorithm + thread8: O(2N)
-//package hw06;
+package hw06;
 
 public class HW06_4108056005_2 extends Dessert_Desert
 {
 	static byte tNum = 8;
 	static byte logtNum = 3;
-	static MultiThread[] mt;
+	static MultiThread[] mt = new MultiThread[tNum];;
 	static int len, arr_len;
 	static int[][] min = new int[tNum][100000];
 	static int[][] max = new int[tNum][100000];
@@ -15,9 +15,7 @@ public class HW06_4108056005_2 extends Dessert_Desert
 
 	
 	public HW06_4108056005_2() 
-	{
-		mt = new MultiThread[tNum];
-		
+	{	
 		for(int tr=0; tr<tNum; tr++) 
 		{
 			mt[tr] = new MultiThread(tr);
@@ -26,19 +24,19 @@ public class HW06_4108056005_2 extends Dessert_Desert
 	
 	public static void main(String[] args) 
 	{
-//		HW06_4108056005_2 test = new HW06_4108056005_2();
-//		int[][] array = new int[10000][10000];
-//		System.out.println("case2:");
-//		Stopwatch stopwatch = new Stopwatch();
-//		int[] result = test.maxBlocks(array);
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-//		for(int i = 0; i < result.length; i++)
-//		{
-//			System.out.print(result[i]+", ");
-//		}
-//		System.out.println();
+		HW06_4108056005_2 test = new HW06_4108056005_2();
+		int[][] array = new int[10000][10000];
+		System.out.println("case2:");
+		Stopwatch stopwatch = new Stopwatch();
+		int[] result = test.maxBlocks(array);
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+		for(int i = 0; i < result.length; i++)
+		{
+			System.out.print(result[i]+", ");
+		}
+		System.out.println();
 	}
 	
 	@Override
@@ -61,7 +59,7 @@ public class HW06_4108056005_2 extends Dessert_Desert
 			{
 	            for(int tr=0; tr<tNum; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end	0.037
+	                mt[tr].join();	// merge all thread and wait end
 	            }
 	        }
 			catch(InterruptedException e) {}

@@ -5,19 +5,17 @@ public class HW06_4108056005_3 extends Dessert_Desert
 {
 	static byte tNum = 8;
 	static byte logtNum = 3;
-	static MultiThread[] mt;
+	static MultiThread[] mt = new MultiThread[tNum];
 	static int len, arr_len;
 	static int[][] min = new int[tNum][100000];
 	static int[][] max = new int[tNum][100000];
-	static int[] ans;
+	static volatile int[] ans;
 	static int[][] input_arr;
 	static int[][] arr = new int[tNum][];
 
 	
 	public HW06_4108056005_3() 
 	{
-		mt = new MultiThread[tNum];
-		
 		for(int tr=0; tr<tNum; tr++) 
 		{
 			mt[tr] = new MultiThread(tr);
@@ -27,6 +25,31 @@ public class HW06_4108056005_3 extends Dessert_Desert
 	public static void main(String[] args) 
 	{
 //		HW06_4108056005_3 test = new HW06_4108056005_3();
+//		
+//		 20 test data
+//		int[][] array = {
+//				{2,1,3,2},	// 2
+//				{4,2,6,6,5},	// 2
+//				{2,1,3,2,2},	// 2
+//				{2,1,2,4,3,3,4},	// 4
+//				{1,1,1,1,1,1,1},	// 7
+//				{1,3,5,7,9},	// 5
+//				{5,4,3,2,1},	// 1
+//				{1,3,2,2,5},	// 3
+//				{1,1,2,2,1,1},	// 3
+//				{5,6,7,1,8},	// 2
+//				{2,2,1,2,2},	// 3
+//				{3,5,2,9,4},	// 1
+//				{1,1,2},	// 3
+//				{2,1,1},	// 1
+//				{1,2,3},	// 3
+//				{1,3,2},	// 2
+//				{2,1,3},	// 2
+//				{3,1,2},	// 1
+//				{2,3,1},	// 1
+//				{3,2,1}		// 1
+//		};
+//		
 //		int[][] array = new int[10000][10000];
 //		System.out.println("case3:");
 //		Stopwatch stopwatch = new Stopwatch();
@@ -49,7 +72,7 @@ public class HW06_4108056005_3 extends Dessert_Desert
 		ans = new int[arr_len];
 		
 		// if array length is larger than the number of threads
-		if (arr_len > tNum*4) 
+		if (arr_len > tNum*2) 
 		{
 			// split array to 8 pieces
 			for(int tr=0; tr<tNum; tr++) 
@@ -70,6 +93,13 @@ public class HW06_4108056005_3 extends Dessert_Desert
 		{
 			countMax(0, 0, arr_len);
 		}
+		
+		// sleep 3 second before return
+		try
+		{
+            mt[0].sleep(5);
+        }
+		catch(InterruptedException e) {}
 		
 		return ans;
 	}

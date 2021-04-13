@@ -1,23 +1,23 @@
 // case1_go back algorithm: O(2N)
-//package hw06;
+package hw06;
 
 public class HW06_4108056005_1 extends Dessert_Desert
 {
 	public static void main(String[] args) 
 	{
-//		HW06_4108056005_1 test = new HW06_4108056005_1();
-//		int[][] array = new int[8000][10000];
-//		System.out.println("case1:");
-//		Stopwatch stopwatch = new Stopwatch();
-//		int[] result = test.maxBlocks(array);
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-//		for(int i = 0; i < result.length; i++)
-//		{
-//			System.out.print(result[i]+", ");
-//		}
-//		System.out.println();
+		HW06_4108056005_1 test = new HW06_4108056005_1();
+		int[][] array = new int[10000][10000];
+		System.out.println("case1:");
+		Stopwatch stopwatch = new Stopwatch();
+		int[] result = test.maxBlocks(array);
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+		for(int i = 0; i < result.length; i++)
+		{
+			System.out.print(result[i]+", ");
+		}
+		System.out.println();
 	}
 	
 	static int len, arr_len;
