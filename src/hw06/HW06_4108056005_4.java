@@ -1,4 +1,4 @@
-// case4_go back algorithm + thread8 + function + mod: O(2N)
+// case5_go back algorithm + thread7 + function + main + mod: O(2N)
 //package hw06;
 
 public class HW06_4108056005_4 extends Dessert_Desert
@@ -12,13 +12,12 @@ public class HW06_4108056005_4 extends Dessert_Desert
 	static int[] ans;
 	static int[][] input_arr;
 	static int[][] arr = new int[tNum][];
-
 	
 	public HW06_4108056005_4() 
 	{
-		mt = new MultiThread[tNum];
+		mt = new MultiThread[tNum-1];
 		
-		for(int tr=0; tr<tNum; tr++) 
+		for(int tr = 0; tr < tNum-1; tr++) 
 		{
 			mt[tr] = new MultiThread(tr);
 		}
@@ -26,9 +25,9 @@ public class HW06_4108056005_4 extends Dessert_Desert
 	
 	public static void main(String[] args) 
 	{
-//		HW06_4108056005_4 test = new HW06_4108056005_4();
+//		HW06_4108056005_5 test = new HW06_4108056005_5();
 //		int[][] array = new int[10000][10000];
-//		System.out.println("case4:");
+//		System.out.println("case5:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] result = test.maxBlocks(array);
 //		double time = stopwatch.elapsedTime();
@@ -51,17 +50,25 @@ public class HW06_4108056005_4 extends Dessert_Desert
 		// if array length is larger than the number of threads
 		if (arr_len > tNum*4) 
 		{
-			// split array to 8 pieces
-			for(int tr=0; tr<tNum; tr++) 
+			// split array to other 7 thread
+			for(int tr=0; tr < tNum-1; tr++) 
 			{
 				mt[tr].start();
 			}
 			
+			// use main thread
+    		for(int i = tNum-1; i < arr_len; i += tNum)
+    		{
+//    			System.out.println("main thread, i="+i);
+    			
+    			countMax(7, i);
+    		}
+			
 			try
 			{
-	            for(int tr=0; tr<tNum; tr++) 
+	            for(int tr=0; tr < tNum-1; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end	0.037
+	                mt[tr].join();	// merge all thread and wait end
 	            }
 	        }
 			catch(InterruptedException e) {}

@@ -1,22 +1,23 @@
-// case3_go back algorithm + thread8 + function: O(2N)
+// case5_go back algorithm + thread7 + function + main + mod: O(2N)
 //package hw06;
 
 public class HW06_4108056005_3 extends Dessert_Desert
 {
 	static byte tNum = 8;
 	static byte logtNum = 3;
-	static MultiThread[] mt = new MultiThread[tNum];
+	static MultiThread[] mt;
 	static int len, arr_len;
 	static int[][] min = new int[tNum][100000];
 	static int[][] max = new int[tNum][100000];
-	static volatile int[] ans;
+	static int[] ans;
 	static int[][] input_arr;
 	static int[][] arr = new int[tNum][];
-
 	
 	public HW06_4108056005_3() 
 	{
-		for(int tr=0; tr<tNum; tr++) 
+		mt = new MultiThread[tNum-1];
+		
+		for(int tr = 0; tr < tNum-1; tr++) 
 		{
 			mt[tr] = new MultiThread(tr);
 		}
@@ -24,34 +25,9 @@ public class HW06_4108056005_3 extends Dessert_Desert
 	
 	public static void main(String[] args) 
 	{
-//		HW06_4108056005_3 test = new HW06_4108056005_3();
-//		
-//		 20 test data
-//		int[][] array = {
-//				{2,1,3,2},	// 2
-//				{4,2,6,6,5},	// 2
-//				{2,1,3,2,2},	// 2
-//				{2,1,2,4,3,3,4},	// 4
-//				{1,1,1,1,1,1,1},	// 7
-//				{1,3,5,7,9},	// 5
-//				{5,4,3,2,1},	// 1
-//				{1,3,2,2,5},	// 3
-//				{1,1,2,2,1,1},	// 3
-//				{5,6,7,1,8},	// 2
-//				{2,2,1,2,2},	// 3
-//				{3,5,2,9,4},	// 1
-//				{1,1,2},	// 3
-//				{2,1,1},	// 1
-//				{1,2,3},	// 3
-//				{1,3,2},	// 2
-//				{2,1,3},	// 2
-//				{3,1,2},	// 1
-//				{2,3,1},	// 1
-//				{3,2,1}		// 1
-//		};
-//		
+//		HW06_4108056005_5 test = new HW06_4108056005_5();
 //		int[][] array = new int[10000][10000];
-//		System.out.println("case3:");
+//		System.out.println("case5:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] result = test.maxBlocks(array);
 //		double time = stopwatch.elapsedTime();
@@ -72,82 +48,83 @@ public class HW06_4108056005_3 extends Dessert_Desert
 		ans = new int[arr_len];
 		
 		// if array length is larger than the number of threads
-		if (arr_len > tNum*2) 
+		if (arr_len > tNum*4) 
 		{
-			// split array to 8 pieces
-			for(int tr=0; tr<tNum; tr++) 
+			// split array to other 7 thread
+			for(int tr=0; tr < tNum-1; tr++) 
 			{
 				mt[tr].start();
 			}
 			
+			// use main thread
+    		for(int i = tNum-1; i < arr_len; i += tNum)
+    		{
+//    			System.out.println("main thread, i="+i);
+    			
+    			countMax(7, i);
+    		}
+			
 			try
 			{
-	            for(int tr=0; tr<tNum; tr++) 
+	            for(int tr=0; tr < tNum-1; tr++) 
 	            {
-	                mt[tr].join();	// merge all thread and wait end	0.037
+	                mt[tr].join();	// merge all thread and wait end
 	            }
 	        }
 			catch(InterruptedException e) {}
 		} 
 		else 
 		{
-			countMax(0, 0, arr_len);
+			for(int i = 0; i < arr_len; i++)
+			{
+				countMax(0, i);
+			}
 		}
-		
-		// sleep 3 second before return
-		try
-		{
-            mt[0].sleep(5);
-        }
-		catch(InterruptedException e) {}
 		
 		return ans;
 	}
 	
-	private static void countMax(int tr, int start, int end)
+	private static void countMax(int tr, int i)
 	{
-		for(int i = start; i < end; i++)	// each integers array
+		arr[tr] = input_arr[i];
+		len = arr[tr].length;
+		int top = 0;		// top of max and min stack
+		min[tr][0] = max[tr][0] = arr[tr][0];
+		
+		for(int j = 1; j < len; j++)	// each element in array
 		{
-			arr[tr] = input_arr[i];
-			len = arr[tr].length;
-			int top = 0;		// top of max and min stack
-			min[tr][0] = max[tr][0] = arr[tr][0];
-			
-			for(int j = 1; j < len; j++)	// each element in array
+			if(arr[tr][j] >= max[tr][top])	// if next element is bigger than left max
 			{
-				if(arr[tr][j] >= max[tr][top])	// if next element is bigger than left max
-				{
-					top++;
-					max[tr][top] = min[tr][top] = arr[tr][j];
-				}
-				else if(arr[tr][j] < min[tr][top])	// if next element is smaller than left min
-				{
-					min[tr][top] = arr[tr][j];
-				}
+				top++;
+				max[tr][top] = min[tr][top] = arr[tr][j];
 			}
-//			show(i, data);
-			
-			int rmin = min[tr][top], count = 1;	// rmin is the min value from right
-			for(top--; top >= 0; top--)
+			else if(arr[tr][j] < min[tr][top])	// if next element is smaller than left min
 			{
-				/* if rmin is not smaller than the max of this element, it means 
-				 * min of right part is larger or equal to the max of left part, 
-				 * and when they sorted respectively, all part is sorted, too.
-				 * We count plus 1 because this case is the shortest block.
-				 */
-				if(max[tr][top] <= rmin)	// can't merge, so must be one block
-				{
-					count++;
-					rmin = min[tr][top];	// new min of the next block
-				}
-				else if(min[tr][top] < rmin)
-				{
-					rmin = min[tr][top];	// merge might get the smaller min.
-				}
+				min[tr][top] = arr[tr][j];
 			}
-			
-			ans[i] = count;
 		}
+//		show(i, data);
+		
+		int rmin = min[tr][top], count = 1;	// rmin is the min value from right
+		for(top--; top >= 0; top--)
+		{
+			/* if rmin is not smaller than the max of this element, it means 
+			 * min of right part is larger or equal to the max of left part, 
+			 * and when they sorted respectively, all part is sorted, too.
+			 * We count plus 1 because this case is the shortest block.
+			 */
+			if(max[tr][top] <= rmin)	// can't merge, so must be one block
+			{
+				count++;
+				rmin = min[tr][top];	// new min of the next block
+			}
+			else if(min[tr][top] < rmin)
+			{
+				rmin = min[tr][top];	// merge might get the smaller min.
+			}
+		}
+		
+		ans[i] = count;
 	}
 	
 	class MultiThread extends Thread 
@@ -161,12 +138,12 @@ public class HW06_4108056005_3 extends Dessert_Desert
     	
     	public void run() 
     	{
-    		int start = arr_len * tr >> logtNum;
-			int end = arr_len * (tr + 1) >> logtNum;
-			
-//			System.out.println("thread="+tr+", start="+start+", end="+end);
-			
-			countMax(tr, start, end);
+    		for(int i = tr; i < arr_len; i += tNum)
+    		{
+//    			System.out.println("thread="+tr+", i="+i);
+    			
+    			countMax(tr, i);
+    		}
 	    }
 	}
 	
