@@ -1,4 +1,4 @@
-// case5_go back algorithm + thread7 + function + main + mod: O(2N)
+// case5_go back algorithm + thread7 + function + main + mod: O(2N) may wrong
 //package hw06;
 
 public class HW06_4108056005_5 extends Dessert_Desert
