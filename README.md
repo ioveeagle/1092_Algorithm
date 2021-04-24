@@ -15,10 +15,11 @@
 * [HW04_one 0k rock](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw04)
 * [HW05_LLK](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw05)
 * [HW06_Dessert Desert](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw06)
+* [HW07_Buy Phone](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw07)
 
 > 希望演算法可以順利過關~
 
-好運貓貓~~
+好運貓貓祝你期末歐趴~~
 
 ![](https://i.imgur.com/U7tXkC1.gif)
 
