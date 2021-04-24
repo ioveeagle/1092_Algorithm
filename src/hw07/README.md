@@ -1,5 +1,8 @@
 # HW07_Buy Phone
 
+[![hackmd-github-sync-badge](https://hackmd.io/vKNw7zRnRo2J43psbRxhBQ/badge)](https://hackmd.io/vKNw7zRnRo2J43psbRxhBQ)
+
+
 ###### tags: `演算法` `Java`
 
 ## 題目
