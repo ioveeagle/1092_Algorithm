@@ -89,4 +89,6 @@ stack1反過來就是答案了。
 2. Two Stack
 
 ## 排名
-還不知道
+2021/04/25 6:00
+
+![](https://i.imgur.com/1u9Qdoq.png)
