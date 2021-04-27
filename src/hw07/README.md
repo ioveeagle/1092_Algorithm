@@ -83,10 +83,31 @@ stack1反過來就是答案了。
 時間複雜度: **two stack(best case: O(N), worst case: O((1/2)\*N^2^)) = O(N ~ (1/2)\*N^2^)?)**
 
 沒有sort雖然表面上是O(N)，但其實返回pop、push其實也要花時間，所以應該是取決於測資啦，測資越接近排好越有利(好像跟Insertion Sort一樣嘛😅，到底會不會比較快，明天見真章)
+> 有啦，快那一點點
+
+### Merge Sort
+結果助教測資好像不是我想的接近排好的陣列，因為很多人都說用MergeSort比較快，好吧...於是就產生了MergeSort版本。
+
+MergeSort的運作方式就不講了，我的[Algorithm_example>>sorting](https://github.com/AndyChiangSH/1092_Algorithm_example/tree/master/src/sorting)裡就有講了。時間複雜度固定是: **O(NlogN)**
+
+### two 1D-array
+洪學長說兩個一維陣列會比一個二維陣列還更快，明天就知道是不是對的了~
+
+### Counting table
+傳承 Counting sort 的精神，可以不要sort就不要sort!
+
+我直接建一個大到爆的array，index為x，index對應的value則y，掃第一遍時紀錄每個x對應到的y中的最大值，順便找x的最大值和最小值，以減少掃第二遍的時間。
+
+掃第二遍時和以前一樣的找法，只是改成在counting table上掃描，並把答案存在另外一個空陣列中。
+
+這個方法的時間複雜度為: **O(2N)**，完全就是邪魔歪道XD，而且還不僅如此，第一次counting table還可以用執行序再加速www。
 
 ## 版本
-1. Insertion Sort
-2. Two Stack
+1. Insertion Sort: O(N ~ (1/2)*N^2)
+2. two stack: O(N ~ (1/2)*N^2)
+3. Merge Sort: O(NligN + N)
+4. Merge Sort + two 1D-array: O(NligN + N)
+5. Counting table: O(2N)
 
 ## 排名
 2021/04/25 6:00
