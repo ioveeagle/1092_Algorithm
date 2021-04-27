@@ -7,7 +7,7 @@
 
 ## 題目
 
-給你一個二維陣列((x~1~, y~1~), (x~2~, y~2~), ... , (x~n~, y~n~))，x代表手機的螢幕大小，y代表手機的效能表現，請列出無人能取代的手機。
+給你一個二維陣列((x1, y1), (x2, y2), ... , (xn, yn))，x代表手機的螢幕大小，y代表手機的效能表現，請列出無人能取代的手機。
 
 **所謂無人能取代的手機，就是指沒有任何一台手機的x和y兩者都大於等於該手機的x和y。**
 
@@ -91,7 +91,7 @@ stack1反過來就是答案了。
 MergeSort的運作方式就不講了，我的[Algorithm_example>>sorting](https://github.com/AndyChiangSH/1092_Algorithm_example/tree/master/src/sorting)裡就有講了。時間複雜度固定是: **O(NlogN)**
 
 ### two 1D-array
-洪學長說兩個一維陣列會比一個二維陣列還更快，明天就知道是不是對的了~
+[@Forcer0625](https://github.com/Forcer0625) 學長說兩個一維陣列會比一個二維陣列還更快，明天就知道是不是對的了~
 
 ### Counting table
 傳承 Counting sort 的精神，可以不要sort就不要sort!
