@@ -1,4 +1,4 @@
-// case1_Insertion Sort: O(NligN)
+// case1_Insertion Sort: O(N ~ (1/2)*N^2)
 //package hw07;
 
 public class HW07_4108056005_1 extends Buy_Phone {

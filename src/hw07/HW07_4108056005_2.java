@@ -1,11 +1,11 @@
-// case2_two stack: O(N)
+// case2_two stack: O(N ~ (1/2)*N^2)
 //package hw07;
 
 public class HW07_4108056005_2 extends Buy_Phone {
 	
 	static int[][] array;
-	static int[][] stack1 = new int[10][2];
-	static int[][] stack2 = new int[10][2];
+	static int[][] stack1 = new int[10000][2];
+	static int[][] stack2 = new int[10000][2];
 	static int[][] ans;
 	static int right, max;
 	static int arrlen;
