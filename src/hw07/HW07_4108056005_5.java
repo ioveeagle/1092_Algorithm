@@ -4,7 +4,7 @@
 public class HW07_4108056005_5 extends Buy_Phone {
 	
 	static int[][] array;
-	final static public int[] counting = new int[10000];
+	int[] counting = new int[100000];
     final static public int[] screen = new int[10000];
     final static public int[] performance = new int[10000];
 	static int[][] ans;
@@ -33,7 +33,7 @@ public class HW07_4108056005_5 extends Buy_Phone {
 		array = inputArr;
 		arrlen = array.length;
 		
-		int right = 0, left = arrlen;
+		int right = 0, left = array[0][0];
 		for(int i = 0; i < arrlen; i++) {	// counting each x with max of y: O(N)
 			if(array[i][1] > counting[array[i][0]]) {	// if new y is larger than old y
 				counting[array[i][0]] = array[i][1];
@@ -57,7 +57,7 @@ public class HW07_4108056005_5 extends Buy_Phone {
 			}
 		}
 		
-		ans =new int[top][2];
+		ans = new int[top][2];
 		top--;
         for(int i = 0, lim = top+1; i < lim; i++) {	// copy answer from screen and performance 1D-array
             ans[i][0] = screen[top];
