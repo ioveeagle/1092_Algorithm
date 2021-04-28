@@ -100,7 +100,9 @@ MergeSort的運作方式就不講了，我的[Algorithm_example>>sorting](https:
 
 掃第二遍時和以前一樣的找法，只是改成在counting table上掃描，並把答案存在另外一個空陣列中。
 
-這個方法的時間複雜度為: **O(2N)**，完全就是邪魔歪道XD，而且還不僅如此，第一次counting table還可以用執行序再加速www。
+這個方法的時間複雜度為: **O(N+R)**，完全就是邪魔歪道XD，而且還不僅如此，第一次counting table還可以用執行序再加速www。
+
+> N為陣列大小，R為最大值和最小值的差
 
 ## 版本
 1. Insertion Sort: O(N ~ (1/2)*N^2)
