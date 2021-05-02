@@ -16,6 +16,7 @@
 * [HW05_LLK](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw05)
 * [HW06_Dessert Desert](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw06)
 * [HW07_Buy Phone](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw07)
+* [HW08_Buy Phone v2.](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw08)
 
 > 希望演算法可以順利過關~
 
