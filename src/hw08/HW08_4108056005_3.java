@@ -1,7 +1,7 @@
-// case1_Merge Sort + six 1D-array: O(NligN + N)
-package hw08;
+// case3_Merge Sort + six 1D-array: O(1/2*N*R)
+//package hw08;
 
-public class HW08_4108056005_1 extends Buy_Phone_v2 {
+public class HW08_4108056005_3 extends Buy_Phone_v2 {
 	
 	static int[][] array;
 	final static public int[][] temp = new int[10000][6];
@@ -13,22 +13,23 @@ public class HW08_4108056005_1 extends Buy_Phone_v2 {
     final static public int[] d5 = new int[10000];
 	static int[][] ans;
 	
-	public static void main(String[] args) {
-		HW08_4108056005_1 test = new HW08_4108056005_1();
-//		int[][] inputArr = {{8,7,7,4,2,1},{2,4,4,6,2,1},{4,0,5,1,3,2},{5,2,4,3,7,3},{7,5,6,9,8,9}};
-		int[][] inputArr = {{5,5,5,1,1,1},{6,3,8,2,1,1},{8,8,3,2,1,1}};
-		
-		test.shuffle(inputArr);
-		test.show(inputArr);
-		
-		System.out.println("case1:");
-		Stopwatch stopwatch = new Stopwatch();
-		test.bestPhone(inputArr);
-		double time = stopwatch.elapsedTime();
-		System.out.println("elapsed time " + time);
-		
-		test.show(ans);
-	}
+//	public static void main(String[] args) {
+//		HW08_4108056005_3 test = new HW08_4108056005_3();
+////		int[][] inputArr = {{8,7,7,4,2,1},{2,4,4,6,2,1},{4,0,5,1,3,2},{5,2,4,3,7,3},{7,5,6,9,8,9}};
+////		int[][] inputArr = {{5,5,5,1,1,1},{6,3,8,2,1,1},{8,8,3,2,1,1}};
+//		int[][] inputArr = {{5,5,5,1,1,1},{6,8,7,2,1,1},{8,3,2,2,1,1}};
+//		
+//		test.shuffle(inputArr);
+//		test.show(inputArr);
+//		
+//		System.out.println("case3:");
+//		Stopwatch stopwatch = new Stopwatch();
+//		test.bestPhone(inputArr);
+//		double time = stopwatch.elapsedTime();
+//		System.out.println("elapsed time " + time);
+//		
+//		test.show(ans);
+//	}
 	
 	@Override
 	public int[][] bestPhone(int[][] inputArr) {
@@ -36,40 +37,25 @@ public class HW08_4108056005_1 extends Buy_Phone_v2 {
 		int arrlen = array.length;
 		
 		sort(array, 0, arrlen-1);	// Merge Sort: O(NlogN)
+//		show(array);
 		
-		int max1, max2, max3, max4, max5;
-		// last element must be answer, and set max of other five properties.
-		d0[arrlen-1] = array[arrlen-1][0];
-		max1 = d1[arrlen-1] = array[arrlen-1][1];
-		max2 = d2[arrlen-1] = array[arrlen-1][2];
-		max3 = d3[arrlen-1] = array[arrlen-1][3];
-		max4 = d4[arrlen-1] = array[arrlen-1][4];
-		max5 = d5[arrlen-1] = array[arrlen-1][5];
+		// last element must be answer
+		d0[0] = array[arrlen-1][0];
+		d1[0] = array[arrlen-1][1];
+		d2[0] = array[arrlen-1][2];
+		d3[0] = array[arrlen-1][3];
+		d4[0] = array[arrlen-1][4];
+		d5[0] = array[arrlen-1][5];
 		
-		int top = arrlen-2;
-		for(int i = top; i > -1; i--) {	// traverse all elements to find best phone: O(N)
-			boolean isAns = false;
+		int top = 1;
+		for(int i = arrlen-2; i > -1; i--) {	// traverse all elements to find best phone: O(N*R)
+			boolean isAns = true;
 			
-			// if one of the property is larger than max property, set it to new max.
-			if(array[i][1] > max1) {
-				max1 = array[i][1];
-				isAns = true;
-			}
-			if(array[i][2] > max2) {
-				max2 = array[i][2];
-				isAns = true;
-			}
-			if(array[i][3] > max3) {
-				max3 = array[i][3];
-				isAns = true;
-			}
-			if(array[i][4] > max4) {
-				max4 = array[i][4];
-				isAns = true;
-			}
-			if(array[i][5] > max5) {
-				max5 = array[i][5];
-				isAns = true;
+			for(int j = top-1; j > -1; j--) {
+				if(array[i][1] <= d1[j] && array[i][2] <= d2[j] && array[i][3] <= d3[j] && array[i][4] <= d4[j] && array[i][5] <= d5[j]) {
+					isAns = false;
+					break;
+				}
 			}
 			
 			// And put this element to the answer queue.
@@ -80,20 +66,19 @@ public class HW08_4108056005_1 extends Buy_Phone_v2 {
 				d3[top] = array[i][3];
 				d4[top] = array[i][4];
 				d5[top] = array[i][5];
-				top--;
+				top++;
 			}
 		}
 		
-		ans =new int[arrlen-top-1][6];
-        top++;
-        for(int i = 0, lim = arrlen-top; i < lim; i++) {	// copy answer from six 1D-arrays to a 2D-array, it is faster than only one 2D-array!
-            ans[i][0] = d0[top];
+		ans =new int[top][6];
+        for(int i = 0, lim = top; i < lim; i++) {	// copy answer from six 1D-arrays to a 2D-array, it is faster than only one 2D-array!
+        	top--;
+        	ans[i][0] = d0[top];
             ans[i][1] = d1[top];
             ans[i][2] = d2[top];
             ans[i][3] = d3[top];
             ans[i][4] = d4[top];
             ans[i][5] = d5[top];
-            top++;
         }
         
 		return ans;		// return answer

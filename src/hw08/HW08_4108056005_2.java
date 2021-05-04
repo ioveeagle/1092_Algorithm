@@ -1,7 +1,7 @@
-// case1_Merge Sort + six 1D-array: O(NligN + N)
+// case2_Merge Sort + six 1D-array: O(NligN + N)
 package hw08;
 
-public class HW08_4108056005_1 extends Buy_Phone_v2 {
+public class HW08_4108056005_2 extends Buy_Phone_v2 {
 	
 	static int[][] array;
 	final static public int[][] temp = new int[10000][6];
@@ -14,14 +14,14 @@ public class HW08_4108056005_1 extends Buy_Phone_v2 {
 	static int[][] ans;
 	
 	public static void main(String[] args) {
-		HW08_4108056005_1 test = new HW08_4108056005_1();
+		HW08_4108056005_2 test = new HW08_4108056005_2();
 //		int[][] inputArr = {{8,7,7,4,2,1},{2,4,4,6,2,1},{4,0,5,1,3,2},{5,2,4,3,7,3},{7,5,6,9,8,9}};
 		int[][] inputArr = {{5,5,5,1,1,1},{6,3,8,2,1,1},{8,8,3,2,1,1}};
 		
 		test.shuffle(inputArr);
 		test.show(inputArr);
 		
-		System.out.println("case1:");
+		System.out.println("case2:");
 		Stopwatch stopwatch = new Stopwatch();
 		test.bestPhone(inputArr);
 		double time = stopwatch.elapsedTime();
@@ -38,13 +38,14 @@ public class HW08_4108056005_1 extends Buy_Phone_v2 {
 		sort(array, 0, arrlen-1);	// Merge Sort: O(NlogN)
 		
 		int max1, max2, max3, max4, max5;
+		int min1, min2, min3, min4, min5;
 		// last element must be answer, and set max of other five properties.
 		d0[arrlen-1] = array[arrlen-1][0];
-		max1 = d1[arrlen-1] = array[arrlen-1][1];
-		max2 = d2[arrlen-1] = array[arrlen-1][2];
-		max3 = d3[arrlen-1] = array[arrlen-1][3];
-		max4 = d4[arrlen-1] = array[arrlen-1][4];
-		max5 = d5[arrlen-1] = array[arrlen-1][5];
+		max1 = min1 = d1[arrlen-1] = array[arrlen-1][1];
+		max2 = min2 = d2[arrlen-1] = array[arrlen-1][2];
+		max3 = min3 = d3[arrlen-1] = array[arrlen-1][3];
+		max4 = min4 = d4[arrlen-1] = array[arrlen-1][4];
+		max5 = min5 = d5[arrlen-1] = array[arrlen-1][5];
 		
 		int top = arrlen-2;
 		for(int i = top; i > -1; i--) {	// traverse all elements to find best phone: O(N)
@@ -81,6 +82,38 @@ public class HW08_4108056005_1 extends Buy_Phone_v2 {
 				d4[top] = array[i][4];
 				d5[top] = array[i][5];
 				top--;
+			}
+			else {
+				if(array[i][1] > min1) {
+					min1 = array[i][1];
+					isAns = true;
+				}
+				if(array[i][2] > min2) {
+					min2 = array[i][2];
+					isAns = true;
+				}
+				if(array[i][3] > min3) {
+					min3 = array[i][3];
+					isAns = true;
+				}
+				if(array[i][4] > min4) {
+					min4 = array[i][4];
+					isAns = true;
+				}
+				if(array[i][5] > min5) {
+					min5 = array[i][5];
+					isAns = true;
+				}
+				
+				if(isAns) {
+					d0[top] = array[i][0];
+					d1[top] = array[i][1];
+					d2[top] = array[i][2];
+					d3[top] = array[i][3];
+					d4[top] = array[i][4];
+					d5[top] = array[i][5];
+					top--;
+				}
 			}
 		}
 		
