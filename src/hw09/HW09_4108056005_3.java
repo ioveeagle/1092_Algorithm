@@ -1,35 +1,38 @@
-// case1_BFS each vertex: O(V^2^)
+// case3_shrink + guess: O(V+C), where C is the shrink component number
 //package hw09;
 
 import java.util.ArrayList;
 
-public class HW09_4108056005_1 extends LSD {
+public class HW09_4108056005_3 extends LSD {
 	
 	int _vtxNum = 100000;
 	ArrayList<Integer> adjList[] = new ArrayList[_vtxNum];
-	ArrayList<Integer> maxCmp = new ArrayList<Integer>();
 	boolean marked[] = new boolean[_vtxNum];
+	boolean shrink[] = new boolean[_vtxNum];
+	int[] info = new int[_vtxNum];
+	int lsd = 0, deepest = 0, deepestVtx = 0;
 	
-	private int qSize = _vtxNum;
+	private int qSize = _vtxNum/10;
 	private int queue[][] = new int[qSize][2];
 	private int rear = 0, front = 0;
 	
-	public HW09_4108056005_1() {
+	public HW09_4108056005_3() {
 		for(int i = 0; i < _vtxNum; i++) {
 			adjList[i] = new ArrayList<Integer>();
 			marked[i] = false;
+			shrink[i] = true;
 		}
 	}
 	
 //	public static void main(String[] args) {
-//		HW09_4108056005_1 test = new HW09_4108056005_1();
-////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };
-////		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };
-////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };
-////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};
-//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};
+//		HW09_4108056005_3 test = new HW09_4108056005_3();
+////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };	// 4
+////		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };	// 2
+////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };	// 5
+//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};	// 4
+////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};	// 6
 //		
-//		System.out.println("case1:");
+//		System.out.println("case3:");
 //		Stopwatch stopwatch = new Stopwatch();
 //		int ans = test.Distance(inputArr);
 //		double time = stopwatch.elapsedTime();
@@ -61,38 +64,37 @@ public class HW09_4108056005_1 extends LSD {
 				maxVtx = i;
 			}
 		}
-		
 		clear(marked);
-		cDFS(maxCmp, adjList, maxVtx);	// DFS again to pick the vertex in the largest component
+		
+		cDFS(adjList, maxVtx, -1);	// DFS again to pick the vertex in the largest component, and shrink together
 		
 //		System.out.println("Max cmp at "+maxVtx+", and its size "+max);
-//		show(maxCmp);
+//		System.out.println("lsd = "+lsd);
+//		show(info);
 		
 		// use breadth-first search and queue to find the shortest path to all the other vertex
-		clear(marked);
-		int lsd = 0;
-		for(int i = 0; i < maxCmp.size(); i++) {
-			int v = maxCmp.get(i);
-			marked[v] = true;
+		shrink[deepestVtx] = true; 
+		
+		enqueue(queue, deepestVtx, deepest);
+		while(!isEmpty(queue)) {	// if queue is empty, means all vertex has been visited
+			int[] node = dequeue(queue);
+			int nv = node[0], ns = node[1];
 			
-			enqueue(queue, v, 0);
-			while(!isEmpty(queue)) {	// if queue is empty, means all vertex has been visited
-				int[] node = dequeue(queue);
-				int nv = node[0], ns = node[1];
-				for(int j = 0; j < adjList[nv].size(); j++) {
-					// if this vertex has not been visited, then enqueue it
-					if(!marked[adjList[nv].get(j)]) {
-						enqueue(queue,(int) adjList[nv].get(j), ns+1);
-						marked[adjList[nv].get(j)] = true;
-					}
+			if(lsd < ns+info[nv]) {
+				lsd = ns+info[nv];	// max path into this tree
+			}
+			for(int j = 0; j < adjList[nv].size(); j++) {
+				// if this vertex has not been visited, then enqueue it
+				if(!shrink[adjList[nv].get(j)]) {
+					enqueue(queue,(int) adjList[nv].get(j), ns+1);
+					shrink[adjList[nv].get(j)] = true;
 				}
 			}
-//			System.out.println("v = "+v+", maxStep = "+queue[front][1]);
-//			show(shortest);
-			if(lsd < queue[front][1]) {		// last element in queue must be the largest shortest path of this vertex
-				lsd = queue[front][1];
-			}
-			clear(marked);
+		}
+//		System.out.println("v = "+v+", maxStep = "+queue[front][1]+", lsd = "+lsd);
+//		show(shortest);
+		if(lsd < queue[front][1]) {		// last element in queue must be the largest shortest path of this vertex
+			lsd = queue[front][1];
 		}
 //		System.out.println("lsd = "+lsd);
 		
@@ -117,14 +119,49 @@ public class HW09_4108056005_1 extends LSD {
 		return degree + 1;
 	}
 	
-	private void cDFS(ArrayList<Integer> temp, ArrayList[] arr, int v) {
-		if(marked[v]) return;
+	private int cDFS(ArrayList[] arr, int v, int pre) {
+		if(marked[v]) return 0;	// cycle
 		marked[v] = true;
-		temp.add(Integer.valueOf(v));
 		
+		// no cycle
+		boolean isCycle = false;
+		int max1Child = 0, max2Child = 0;
 		for(int i = 0; i < arr[v].size(); i++) {
-			cDFS(temp, adjList, (int) arr[v].get(i));
+			int next = (int) arr[v].get(i);
+			if(next != pre) {
+				int child = cDFS(adjList, next, v);
+				if(child == 0) {
+					isCycle = true;
+				}
+				else if(child > max1Child) {
+					max2Child = max1Child;
+					max1Child = child;
+				}
+				else if(child > max2Child) {
+					max2Child = child;
+				}
+				else {}
+			}
 		}
+		
+//		System.out.println("v = "+v+", max1Child = "+max1Child+", max2Child = "+max2Child+", isCycle = "+isCycle+", arr[v].size() = "+arr[v].size());
+		
+		if((max1Child+max2Child) > lsd) {	// if sum of two subtrees is larger than lsd
+			lsd = (max1Child+max2Child);
+		}
+		if(isCycle) {
+			shrink[v] = false;	// remain shrink component
+			info[v] = max1Child;
+			if(deepest < max1Child) {
+				deepest = max1Child;
+				deepestVtx = v;
+			}
+			return 0;
+		}
+		else {
+			return Math.max(max1Child, max2Child)+1;
+		}
+		
 	}
 	
 	private void show(ArrayList[] arr) {
