@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class HW09_4108056005_2 extends LSD {
 	
-	int _vtxNum = 100000;
+	int _vtxNum = 30000;
 	ArrayList<Integer> adjList[] = new ArrayList[_vtxNum];
 	ArrayList<Integer> maxCmp = new ArrayList<Integer>();
 	boolean marked[] = new boolean[_vtxNum];
@@ -16,12 +16,6 @@ public class HW09_4108056005_2 extends LSD {
 	private int queue[][] = new int[qSize][2];
 	private int rear = 0, front = 0;
 	
-	public HW09_4108056005_2() {
-		for(int i = 0; i < _vtxNum; i++) {
-			adjList[i] = new ArrayList<Integer>();
-			marked[i] = false;
-		}
-	}
 	
 //	public static void main(String[] args) {
 //		HW09_4108056005_2 test = new HW09_4108056005_2();
@@ -43,6 +37,10 @@ public class HW09_4108056005_2 extends LSD {
 	@Override
 	public int Distance(int[][] array) {
 		int arrLen = array.length;
+		for(int i = 0; i < _vtxNum; i++) {
+			adjList[i] = new ArrayList<Integer>();
+			marked[i] = false;
+		}
 		
 		// create adj list of the graph
 		for(int i = 0; i < arrLen; i++) {

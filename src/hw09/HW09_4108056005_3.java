@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class HW09_4108056005_3 extends LSD {
 	
-	int _vtxNum = 100000;
+	final int _vtxNum = 20000;
 	ArrayList<Integer> adjList[] = new ArrayList[_vtxNum];
 	boolean marked[] = new boolean[_vtxNum];
 	boolean shrink[] = new boolean[_vtxNum];
 	int[] info = new int[_vtxNum];
-	int lsd = 0, deepest = 0, deepestVtx = 0;
+	static int lsd = 0, deepest = 0, deepestVtx = 0;
 	
-	private int qSize = _vtxNum/10;
+	private int qSize = _vtxNum/5;
 	private int queue[][] = new int[qSize][2];
 	private int rear = 0, front = 0;
 	
@@ -26,10 +26,10 @@ public class HW09_4108056005_3 extends LSD {
 	
 //	public static void main(String[] args) {
 //		HW09_4108056005_3 test = new HW09_4108056005_3();
-////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };	// 4
+//		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };	// 4
 ////		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };	// 2
 ////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };	// 5
-//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};	// 4
+////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};	// 4
 ////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};	// 6
 //		
 //		System.out.println("case3:");
@@ -85,9 +85,9 @@ public class HW09_4108056005_3 extends LSD {
 			}
 			for(int j = 0; j < adjList[nv].size(); j++) {
 				// if this vertex has not been visited, then enqueue it
-				if(!shrink[adjList[nv].get(j)]) {
+				if(!shrink[(int) adjList[nv].get(j)]) {
 					enqueue(queue,(int) adjList[nv].get(j), ns+1);
-					shrink[adjList[nv].get(j)] = true;
+					shrink[(int) adjList[nv].get(j)] = true;
 				}
 			}
 		}
@@ -107,7 +107,7 @@ public class HW09_4108056005_3 extends LSD {
 		}
 	}
 	
-	private int DFS(ArrayList[] arr, int v) {
+	private int DFS(ArrayList<Integer>[] arr, int v) {
 		if(marked[v]) return 0;
 		marked[v] = true;
 		
@@ -119,7 +119,7 @@ public class HW09_4108056005_3 extends LSD {
 		return degree + 1;
 	}
 	
-	private int cDFS(ArrayList[] arr, int v, int pre) {
+	private int cDFS(ArrayList<Integer>[] arr, int v, int pre) {
 		if(marked[v]) return 0;	// cycle
 		marked[v] = true;
 		
@@ -164,7 +164,7 @@ public class HW09_4108056005_3 extends LSD {
 		
 	}
 	
-	private void show(ArrayList[] arr) {
+	private void show(ArrayList<Integer>[] arr) {
 		System.out.println("edges:");
 		for(int i = 0; i < arr.length; i++) {
 			for(int j = 0; j < arr[i].size(); j++) {
@@ -173,7 +173,7 @@ public class HW09_4108056005_3 extends LSD {
 		}
 	}
 	
-	private void show(ArrayList arr) {
+	private void show(ArrayList<Integer> arr) {
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.print(arr.get(i)+" ");
 		}

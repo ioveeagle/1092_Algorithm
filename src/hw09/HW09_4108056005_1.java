@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class HW09_4108056005_1 extends LSD {
 	
-	int _vtxNum = 100000;
+	int _vtxNum = 50000;
 	ArrayList<Integer> adjList[] = new ArrayList[_vtxNum];
 	ArrayList<Integer> maxCmp = new ArrayList<Integer>();
 	boolean marked[] = new boolean[_vtxNum];
