@@ -1,18 +1,18 @@
 // case3_shrink + guess: O(V+C), where C is the shrink component number
-//package hw09;
+package hw09;
 
 import java.util.ArrayList;
 
 public class HW09_4108056005_3 extends LSD {
 	
-	final int _vtxNum = 20000;
+	final int _vtxNum = 2000000;
 	ArrayList<Integer> adjList[] = new ArrayList[_vtxNum];
 	boolean marked[] = new boolean[_vtxNum];
 	boolean shrink[] = new boolean[_vtxNum];
 	int[] info = new int[_vtxNum];
 	static int lsd = 0, deepest = 0, deepestVtx = 0;
 	
-	private int qSize = _vtxNum/5;
+	private int qSize = _vtxNum;
 	private int queue[][] = new int[qSize][2];
 	private int rear = 0, front = 0;
 	
@@ -24,22 +24,23 @@ public class HW09_4108056005_3 extends LSD {
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		HW09_4108056005_3 test = new HW09_4108056005_3();
+	public static void main(String[] args) {
+		HW09_4108056005_3 test = new HW09_4108056005_3();
 //		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };	// 4
-////		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };	// 2
-////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };	// 5
-////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};	// 4
-////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};	// 6
-//		
-//		System.out.println("case3:");
-//		Stopwatch stopwatch = new Stopwatch();
-//		int ans = test.Distance(inputArr);
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-//		System.out.println(ans);
-//	}
+//		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };	// 2
+//		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };	// 5
+//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};	// 4
+//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};	// 6
+		int[][] inputArr = new TestDataGenerator().readData();	
+		
+		System.out.println("case3:");
+		Stopwatch stopwatch = new Stopwatch();
+		int ans = test.Distance(inputArr);
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+		System.out.println(ans);
+	}
 	
 	@Override
 	public int Distance(int[][] array) {
@@ -58,10 +59,15 @@ public class HW09_4108056005_3 extends LSD {
 		// find the largest component
 		int max = 0, maxVtx = 0;
 		for(int i = 0; i < arrLen; i++) {
-			int cmp = DFS(adjList, i);	// use deep-first search
+			int cmp = DFS(adjList, array[i][0]);	// use deep-first search
 			if(cmp > max) {
 				max = cmp;
-				maxVtx = i;
+				maxVtx = array[i][0];
+			}
+			cmp = DFS(adjList, array[i][1]);	// use deep-first search
+			if(cmp > max) {
+				max = cmp;
+				maxVtx = array[i][1];
 			}
 		}
 		clear(marked);
@@ -72,9 +78,9 @@ public class HW09_4108056005_3 extends LSD {
 //		System.out.println("lsd = "+lsd);
 //		show(info);
 		
-		// use breadth-first search and queue to find the shortest path to all the other vertex
+		// use breadth-first search and queue to find the shortest path 
+		// from deepest vertex to all the other vertex
 		shrink[deepestVtx] = true; 
-		
 		enqueue(queue, deepestVtx, deepest);
 		while(!isEmpty(queue)) {	// if queue is empty, means all vertex has been visited
 			int[] node = dequeue(queue);
