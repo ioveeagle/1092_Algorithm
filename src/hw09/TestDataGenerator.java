@@ -159,7 +159,7 @@ public class TestDataGenerator {
 		int[][] A = null;
 		
 		try {
-			FileReader fr = new FileReader("D:\\雲端\\程式檔案\\Eclipse\\file\\1092_Algorithm\\src\\hw09\\testData_788.txt");
+			FileReader fr = new FileReader("D:\\雲端\\程式檔案\\Eclipse\\file\\1092_Algorithm\\src\\hw09\\testData_598.txt");
 			BufferedReader bfr = new BufferedReader(fr);
 			
 			int lines = Integer.parseInt(bfr.readLine());

@@ -23,7 +23,8 @@ public class HW09_4108056005_2 extends LSD {
 ////		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };	// 2
 ////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };	// 5
 ////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};
-//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};	// 6
+////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};	// 6
+//		int[][] inputArr = new TestDataGenerator().readData();	
 //		
 //		System.out.println("case2:");
 //		Stopwatch stopwatch = new Stopwatch();
@@ -55,10 +56,15 @@ public class HW09_4108056005_2 extends LSD {
 		// find the largest component
 		int max = 0, maxVtx = 0;
 		for(int i = 0; i < arrLen; i++) {
-			int cmp = DFS(adjList, i);	// use deep-first search
+			int cmp = DFS(adjList, array[i][0]);	// use deep-first search in first vertex
 			if(cmp > max) {
 				max = cmp;
-				maxVtx = i;
+				maxVtx = array[i][0];
+			}
+			cmp = DFS(adjList, array[i][1]);	// use deep-first search in second vertex
+			if(cmp > max) {
+				max = cmp;
+				maxVtx = array[i][1];
 			}
 		}	
 		clear(marked);
