@@ -1,23 +1,21 @@
-// case3_BFS from farthest vertex: O(V^2^)
+// case3_BFS from farthest vertex + resizing list
 //package hw09;
-
-import java.util.ArrayList;
 
 public class HW09_4108056005_3 extends LSD {
 	
-	int _vtxNum = 2000000;
-	ArrayList<Integer> adjList[] = new ArrayList[_vtxNum];
-	ArrayList<Integer> maxCmp = new ArrayList<Integer>();
+	int _vtxNum = 1500000;
+	resizeArray adjList[] = new resizeArray[_vtxNum];
+	resizeArray maxCmp = new resizeArray();
 	boolean marked[] = new boolean[_vtxNum];
 	int maxDegree = 0, maxDegreeVtx = 0;
 	
-	private int qSize = _vtxNum;
+	private int qSize = _vtxNum/2;
 	private int queue[][] = new int[qSize][2];
 	private int rear = 0, front = 0;
 	
 	public HW09_4108056005_3() {
 		for(int i = 0; i < _vtxNum; i++) {
-			adjList[i] = new ArrayList<Integer>();
+			adjList[i] = new resizeArray();
 			marked[i] = false;
 		}
 	}
@@ -46,8 +44,8 @@ public class HW09_4108056005_3 extends LSD {
 		
 		// create adj list of the graph
 		for(int i = 0; i < arrLen; i++) {
-			adjList[array[i][0]].add(array[i][1]);
-			adjList[array[i][1]].add(array[i][0]);
+			adjList[array[i][0]].push(array[i][1]);
+			adjList[array[i][1]].push(array[i][0]);
 			
 //			System.out.println("add edge of "+array[i][0]+" and "+array[i][1]);
 		}
@@ -68,10 +66,9 @@ public class HW09_4108056005_3 extends LSD {
 				maxVtx = array[i][1];
 			}
 		}
-		clear(marked);
 		
-		cDFS(maxCmp, adjList, maxVtx);	// DFS again to pick the vertex in the largest component	
-		clearMaxCmp(marked);
+		// DFS again to pick the vertex in the largest component
+		cDFS(maxCmp, adjList, maxVtx);
 		
 //		System.out.println("Max degree at "+maxDegreeVtx+", and its degree "+maxDegree);
 //		System.out.println("Max cmp at "+maxVtx+", and its size "+max);
@@ -84,7 +81,7 @@ public class HW09_4108056005_3 extends LSD {
 		while(!isEmpty(queue)) {	// if queue is empty, means all vertex has been visited
 			int[] node = dequeue(queue);
 			int nv = node[0], ns = node[1];
-			for(int j = 0; j < adjList[nv].size(); j++) {
+			for(int j = 0; j < adjList[nv].top(); j++) {
 				// if this vertex has not been visited, then enqueue it
 				if(!marked[adjList[nv].get(j)]) {
 					enqueue(queue,(int) adjList[nv].get(j), ns+1);
@@ -93,20 +90,19 @@ public class HW09_4108056005_3 extends LSD {
 			}
 		}
 //		System.out.println("farthest = "+queue[front][0]+", "+queue[front][1]);
-		clearMaxCmp(marked);
 		
 		int farthestVtx = queue[front][0];	// last element in queue must be the farthest vertex
 		// use breadth-first search and queue to find the shortest path from farthest vertex to all the other vertex	
-		marked[farthestVtx] = true;
+		marked[farthestVtx] = false;
 		enqueue(queue, farthestVtx, 0);
 		while(!isEmpty(queue)) {	// if queue is empty, means all vertex has been visited
 			int[] node = dequeue(queue);
 			int nv = node[0], ns = node[1];
-			for(int j = 0; j < adjList[nv].size(); j++) {
+			for(int j = 0; j < adjList[nv].top(); j++) {
 				// if this vertex has not been visited, then enqueue it
-				if(!marked[adjList[nv].get(j)]) {
+				if(marked[adjList[nv].get(j)]) {
 					enqueue(queue,(int) adjList[nv].get(j), ns+1);
-					marked[adjList[nv].get(j)] = true;
+					marked[adjList[nv].get(j)] = false;
 				}
 			}
 		}
@@ -116,55 +112,43 @@ public class HW09_4108056005_3 extends LSD {
 		return lsd;
 	}
 	
-	private void clear(boolean[] arr) {
-		for(int i = 0; i < arr.length; i++) {
-			arr[i] = false;
-		}
-	}
-	
-	private void clearMaxCmp(boolean[] arr) {
-		for(int i = 0; i < maxCmp.size(); i++) {
-			arr[maxCmp.get(i)] = false;	// only set shrink component to false
-		}
-	}
-	
-	private int DFS(ArrayList[] arr, int v) {
+	private int DFS(resizeArray[] arr, int v) {
 		if(marked[v]) return 0;
 		marked[v] = true;
 		
 		int degree = 0;
-		for(int i = 0; i < arr[v].size(); i++) {
+		for(int i = 0; i < arr[v].top(); i++) {
 			degree += DFS(adjList, (int) arr[v].get(i));
 		}
 		
 		return degree + 1;
 	}
 	
-	private void cDFS(ArrayList<Integer> temp, ArrayList[] arr, int v) {
-		if(marked[v]) return;
-		marked[v] = true;
-		temp.add(Integer.valueOf(v));
+	private void cDFS(resizeArray temp, resizeArray[] arr, int v) {
+		if(!marked[v]) return;
+		marked[v] = false;
+		temp.push(Integer.valueOf(v));
 		
-		if(maxDegree < arr[v].size()) {
-			maxDegree = arr[v].size();
+		if(maxDegree < arr[v].top()) {
+			maxDegree = arr[v].top();
 			maxDegreeVtx = v;
 		}
-		for(int i = 0; i < arr[v].size(); i++) {
+		for(int i = 0; i < arr[v].top(); i++) {
 			cDFS(temp, adjList, (int) arr[v].get(i));
 		}
 	}
 	
-	private void show(ArrayList[] arr) {
+	private void show(resizeArray[] arr) {
 		System.out.println("edges:");
 		for(int i = 0; i < arr.length; i++) {
-			for(int j = 0; j < arr[i].size(); j++) {
+			for(int j = 0; j < arr[i].top(); j++) {
 				System.out.println(i+" -> "+arr[i].get(j));
 			}
 		}
 	}
 	
-	private void show(ArrayList arr) {
-		for(int i = 0; i < arr.size(); i++) {
+	private void show(resizeArray arr) {
+		for(int i = 0; i < arr.top(); i++) {
 			System.out.print(arr.get(i)+" ");
 		}
 		System.out.println();
@@ -205,6 +189,46 @@ public class HW09_4108056005_3 extends LSD {
 			front = (front+1)%qSize;
 //			System.out.println("dequeue "+queue[front][0]+", "+queue[front][1]);
 			return queue[front];
+		}
+	}
+	
+	class resizeArray {
+		private int top = 0;
+		private int array[] = new int[1];
+		
+		public resizeArray() {
+			// TODO Auto-generated constructor stub
+		}
+		
+		public void resize(int newSize) {
+			int copy[] = new int[newSize];
+			System.arraycopy(array, 0, copy, 0, array.length);
+			array = copy;
+		}	
+		public void push(int v) {
+//			System.out.println("push "+v);
+			if(top == array.length) {
+//				System.out.println("size*2");
+				resize(2*array.length);
+			}
+			array[top] = v;
+			top++;
+		}	
+		public int pop() {
+			top--;
+			int v = array[top];
+			array[top] = 0;
+			if(top > 0 && top == array.length/4) {
+				System.out.println("size/2");
+				resize(array.length/2);
+			}
+			return v;
+		}
+		public int get(int i) {
+			return array[i];
+		}
+		public int top() {
+			return top;
 		}
 	}
 }
