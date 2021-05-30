@@ -18,10 +18,9 @@
 * [HW07_Buy Phone](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw07)
 * [HW08_Buy Phone v2.](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw08)
 * [HW09_LSD](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw09)
+* [HW10_Sorting](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw10)
 
-> 希望演算法可以順利過關~
-
-好運貓貓祝你期末歐趴~~
+> 好運貓貓祝你期末歐趴~~
 
 ![](https://i.imgur.com/U7tXkC1.gif)
 
