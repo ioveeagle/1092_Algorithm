@@ -1,5 +1,5 @@
 // case1_BFS each vertex: O(V^2^)
-//package hw09;
+package hw09;
 
 import java.util.ArrayList;
 
@@ -21,23 +21,23 @@ public class HW09_4108056005_1 extends LSD {
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		HW09_4108056005_1 test = new HW09_4108056005_1();
-////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };
-////		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };
-////		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };
-////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};
-////		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};
-//		int[][] inputArr = new TestDataGenerator().readData();	
-//		
-//		System.out.println("case1:");
-//		Stopwatch stopwatch = new Stopwatch();
-//		int ans = test.Distance(inputArr);
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("elapsed time " + time);
-//		
-//		System.out.println(ans);
-//	}
+	public static void main(String[] args) {
+		HW09_4108056005_1 test = new HW09_4108056005_1();
+//		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 0, 4 }, { 1, 3 }, { 1, 4 }, { 2, 5 }, { 6, 7 } };
+//		int[][] inputArr = { { 1, 2 }, { 3, 2 }, { 5, 4 }, { 4, 6 }, { 7, 4 }, { 9, 8 } };
+//		int[][] inputArr = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 }, { 2, 5 }, { 2, 6 }, { 3, 7 }, { 5, 6 }, { 5, 7 }, { 6, 9 }, { 7, 8 }, { 9, 10 } };
+//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }};
+//		int[][] inputArr = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 1 }, { 2, 4 }, { 5, 4 }, { 6, 4 }, { 3, 7 }, { 7, 8 }, { 7, 10 }, { 8, 9 }};
+		int[][] inputArr = new TestDataGenerator().readData();	
+		
+		System.out.println("case1:");
+		Stopwatch stopwatch = new Stopwatch();
+		int ans = test.Distance(inputArr);
+		double time = stopwatch.elapsedTime();
+		System.out.println("elapsed time " + time);
+		
+		System.out.println(ans);
+	}
 	
 	@Override
 	public int Distance(int[][] array) {
