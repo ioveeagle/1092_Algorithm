@@ -3,7 +3,7 @@
 
 public class HW10_4108056005_4 extends SortingArray {
 
-	static int CUTOFF = 16;
+	static int CUTOFF = 64;
 	
 //	public static void main(String[] args) {
 //		HW10_4108056005_4 test = new HW10_4108056005_4();

@@ -7,12 +7,13 @@ public class HW10_4108056005_2 extends SortingArray {
 
 	public static void main(String[] args) {
 		HW10_4108056005_2 test = new HW10_4108056005_2();
-		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
+//		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
 //		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
+		int[] input = new TestDataGenerator().readData();
 
 		System.out.println("case2:");
-		System.out.println("Input array: ");
-		test.printArray(input, input.length);
+//		System.out.println("Input array: ");
+//		test.printArray(input, input.length);
 
 		Stopwatch stopwatch = new Stopwatch();
 		int[] ans = test.sorting(input);

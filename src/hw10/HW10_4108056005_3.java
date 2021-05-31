@@ -8,11 +8,12 @@ public class HW10_4108056005_3 extends SortingArray {
 //	public static void main(String[] args) {
 //		HW10_4108056005_3 test = new HW10_4108056005_3();
 ////		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
-//		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
+////		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
+//		int[] input = new TestDataGenerator().readData();
 //
 //		System.out.println("case3:");
-//		System.out.println("Input array: ");
-//		test.printArray(input, input.length);
+////		System.out.println("Input array: ");
+////		test.printArray(input, input.length);
 //
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] ans = test.sorting(input);
@@ -21,6 +22,21 @@ public class HW10_4108056005_3 extends SortingArray {
 //
 //		System.out.println("Sorted array: ");
 //		test.printArray(ans, ans.length);
+//		
+////		for(int i = 0; i < ans.length; i++) {
+////			if(ans[i] != ref[i]) {
+////				System.out.println("Wrong answer in "+i);
+////				for(int j = Math.max(0, i-20); j < Math.min(input.length, i+20); j++) {
+////					System.out.print(ans[i]+" ");
+////				}
+////				System.out.println();
+////				for(int j = Math.max(0, i-20); j < Math.min(input.length, i+20); j++) {
+////					System.out.print(ref[i]+" ");
+////				}
+////				System.out.println();
+////				break;
+////			}
+////		}
 //	}
 
 	@Override
@@ -51,11 +67,11 @@ public class HW10_4108056005_3 extends SortingArray {
 		int i = lo, j = hi + 1;
 
 		while (true) {
-			while (a[++i] > a[lo])
+			while (a[++i] <= a[lo])
 				if (i == hi)
 					break;
 
-			while (a[--j] <= a[lo])
+			while (a[--j] > a[lo])
 				if (j == lo)
 					break;
 
