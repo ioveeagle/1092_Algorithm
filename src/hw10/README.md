@@ -20,9 +20,18 @@
 
 反正有五個機會，就什麼Sort都給它試下去吧!!
 
-1. TimSort
-2. MergeSort
-3. QuickSort
+## Sorting擂台賽
+### TimSort
+很慘，目前62名。
 
-## 排名
+### MergeSort
+CUTOFF = 32是目前最快的，第12名。
+
+### QuickSort
+?
+
+### ShellSort
+?
+
+### CountingSort
 ?
