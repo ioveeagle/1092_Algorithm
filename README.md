@@ -2,8 +2,6 @@
 
 > 1092_演算法作業
 
-[![hackmd-github-sync-badge](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA/badge)](https://hackmd.io/NRt0C7OHTAKlyU2YjHB9aA)
-
 ###### tags: `演算法` `Java`
 
 **為了提升開源風氣，我也把我的演算法作業也改成公開的了。**
