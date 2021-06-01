@@ -69,7 +69,7 @@ public class HW10_4108056005_2 extends SortingArray {
 	}
 
 	private void insertion(int[] a, int lo, int hi) {
-		for (int i = lo + 1; i < hi; i++) {
+		for (int i = lo + 1; i <= hi; i++) {
 			int temp = a[i];
 			int j = i;
 			while(j > lo && temp < a[j-1]) {

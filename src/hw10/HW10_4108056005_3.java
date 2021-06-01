@@ -3,12 +3,13 @@
 
 public class HW10_4108056005_3 extends SortingArray {
 
-	static int CUTOFF = 32;
+	final static int CUTOFF = 32;
 
 //	public static void main(String[] args) {
 //		HW10_4108056005_3 test = new HW10_4108056005_3();
-//		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
+////		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
 ////		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
+//		int[] input = { 1, 1, 1, 1, 2, 1, 1, 1, 1 };
 ////		int[] input = new TestDataGenerator().readData();
 //
 //		System.out.println("case3:");
@@ -84,7 +85,7 @@ public class HW10_4108056005_3 extends SortingArray {
 	}
 
 	private void insertion(int[] a, int lo, int hi) {
-		for (int i = lo + 1; i < hi; i++) {
+		for (int i = lo + 1; i <= hi; i++) {
 			int temp = a[i];
 			int j = i;
 			while(j > lo && temp < a[j-1]) {
