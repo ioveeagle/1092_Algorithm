@@ -7,13 +7,13 @@ public class HW10_4108056005_3 extends SortingArray {
 
 //	public static void main(String[] args) {
 //		HW10_4108056005_3 test = new HW10_4108056005_3();
-////		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
+//		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
 ////		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
-//		int[] input = new TestDataGenerator().readData();
+////		int[] input = new TestDataGenerator().readData();
 //
 //		System.out.println("case3:");
-////		System.out.println("Input array: ");
-////		test.printArray(input, input.length);
+//		System.out.println("Input array: ");
+//		test.printArray(input, input.length);
 //
 //		Stopwatch stopwatch = new Stopwatch();
 //		int[] ans = test.sorting(input);
@@ -22,29 +22,23 @@ public class HW10_4108056005_3 extends SortingArray {
 //
 //		System.out.println("Sorted array: ");
 //		test.printArray(ans, ans.length);
-//		
-////		for(int i = 0; i < ans.length; i++) {
-////			if(ans[i] != ref[i]) {
-////				System.out.println("Wrong answer in "+i);
-////				for(int j = Math.max(0, i-20); j < Math.min(input.length, i+20); j++) {
-////					System.out.print(ans[i]+" ");
-////				}
-////				System.out.println();
-////				for(int j = Math.max(0, i-20); j < Math.min(input.length, i+20); j++) {
-////					System.out.print(ref[i]+" ");
-////				}
-////				System.out.println();
-////				break;
-////			}
-////		}
 //	}
 
 	@Override
 	public int[] sorting(int[] A) {
 
+		shuffle(A);
 		quickSort(A);
 
 		return A;
+	}
+	
+	public void shuffle(int[] a) {
+		int N = a.length;
+		for (int i = 0; i < N; i++) {
+			int r = (int) (Math.random() * (i));
+			exch(a, i, r);
+		}
 	}
 
 	private void quickSort(int[] a) {
@@ -90,14 +84,14 @@ public class HW10_4108056005_3 extends SortingArray {
 	}
 
 	private void insertion(int[] a, int lo, int hi) {
-		for (int i = lo + 1; i <= hi; i++) {
-			for (int j = i; j > lo; j--) {
-				if (a[j] < a[j - 1]) {
-					exch(a, j, j-1);
-				} else {
-					break;
-				}
+		for (int i = lo + 1; i < hi; i++) {
+			int temp = a[i];
+			int j = i;
+			while(j > lo && temp < a[j-1]) {
+				a[j] = a[j-1];
+				j--;
 			}
+			a[j] = temp;
 		}
 	}
 

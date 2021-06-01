@@ -159,7 +159,7 @@ public class TestDataGenerator {
 		int[] A = null;
 		
 		try {
-			FileReader fr = new FileReader("D:\\雲端\\NCHU\\大二\\大二下\\演算法\\作業\\testData\\hw10_testData\\testData_20000_3.txt");
+			FileReader fr = new FileReader("D:\\雲端\\NCHU\\大二\\大二下\\演算法\\作業\\testData\\hw10_testData\\testData_1000.txt");
 			BufferedReader bfr = new BufferedReader(fr);
 			
 			int lines = Integer.parseInt(bfr.readLine());

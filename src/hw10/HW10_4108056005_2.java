@@ -1,28 +1,28 @@
 // case2 - MergeSort: O(NlogN)
-package hw10;
+//package hw10;
 
 public class HW10_4108056005_2 extends SortingArray {
 
 	static int CUTOFF = 32;
 
-	public static void main(String[] args) {
-		HW10_4108056005_2 test = new HW10_4108056005_2();
+//	public static void main(String[] args) {
+//		HW10_4108056005_2 test = new HW10_4108056005_2();
 //		int[] input = { -2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12 };
-//		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
-		int[] input = new TestDataGenerator().readData();
-
-		System.out.println("case2:");
-//		System.out.println("Input array: ");
-//		test.printArray(input, input.length);
-
-		Stopwatch stopwatch = new Stopwatch();
-		int[] ans = test.sorting(input);
-		double time = stopwatch.elapsedTime();
-		System.out.println("elapsed time " + time);
-
-		System.out.println("Sorted array: ");
-		test.printArray(ans, ans.length);
-	}
+////		int[] input = { -1, 2, 5, 9, 8, 7, 1, 3, 2 };
+////		int[] input = new TestDataGenerator().readData();
+//
+//		System.out.println("case2:");
+////		System.out.println("Input array: ");
+////		test.printArray(input, input.length);
+//
+//		Stopwatch stopwatch = new Stopwatch();
+//		int[] ans = test.sorting(input);
+//		double time = stopwatch.elapsedTime();
+//		System.out.println("elapsed time " + time);
+//
+//		System.out.println("Sorted array: ");
+//		test.printArray(ans, ans.length);
+//	}
 
 	@Override
 	public int[] sorting(int[] A) {
@@ -67,22 +67,16 @@ public class HW10_4108056005_2 extends SortingArray {
 				a[k] = aux[j++];
 		}
 	}
-	
-	private void exch(int[] a, int i, int j) {
-		int temp = a[i];
-		a[i] = a[j];
-		a[j] = temp;
-	}
 
 	private void insertion(int[] a, int lo, int hi) {
-		for (int i = lo + 1; i <= hi; i++) {
-			for (int j = i; j > lo; j--) {
-				if (a[j] < a[j - 1]) {
-					exch(a, j, j-1);
-				} else {
-					break;
-				}
+		for (int i = lo + 1; i < hi; i++) {
+			int temp = a[i];
+			int j = i;
+			while(j > lo && temp < a[j-1]) {
+				a[j] = a[j-1];
+				j--;
 			}
+			a[j] = temp;
 		}
 	}
 
