@@ -1,0 +1,13 @@
+11
+7
+A Apple
+C Cat
+D Dog
+E Egg
+Egg Email
+Apple Ant
+B Ball
+F Flag
+G Gold
+Gold Good
+Good Git

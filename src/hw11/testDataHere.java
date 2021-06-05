@@ -2,7 +2,7 @@ package hw11;
 
 public class testDataHere {
 	
-	public int testDataNum = 4;
+	public int testDataNum = 5;
 	
 	public static String[][] readData(int num) {
 		
@@ -36,6 +36,13 @@ public class testDataHere {
 			A = a;
 			B = b;
 			System.out.println("Answer is 7");
+		}
+		if(num == 4) {
+			String[] a = {"B", "B", "A", "A", "F", "F", "I", "F", "B"};
+			String[] b = {"A", "C", "D", "E", "G", "H", "J", "I", "F"};
+			A = a;
+			B = b;
+			System.out.println("Answer is 1");
 		}
 		
 		String[][] ret = {A, B};

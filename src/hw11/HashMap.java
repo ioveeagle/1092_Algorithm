@@ -3,33 +3,36 @@ package hw11;
 public class HashMap {
 	public static void main(String[] args) {
 		
-//		String[] A = {"A", "B", "D", "G", "E", "I", "E"};
-//		String[] B = {"B", "C", "E", "E", "F", "H", "J"};
+		String s = "123";
+		System.out.println(Integer.parseInt(s)+1);
 		
-		String[] A = {"A", "B", "B", "C", "B", "D", "F", "G"};
-		String[] B = {"E", "E", "C", "D", "D", "E", "H", "H"};
-		
-		int n = A.length;
-		
-//		System.out.println("HashCode without & n-1");
-//		for(int i = 0; i < n; i++) {
-//			System.out.println(A[i].hashCode());
-//		}
-//		System.out.println("HashCode with & n-1");
-//		for(int i = 0; i < n; i++) {
-//			System.out.println(A[i].hashCode() & (n-1));
-//		}
-		
-		MyMap<String, String> hashMap = new MyMap<>();
-//		for(int i = 0; i < n; i++) {
-//			hashMap.put(A[i], B[i]);
-//			hashMap.put(B[i], A[i]);
-//		}
-		
-		System.out.println(hashMap.get("A"));
-		System.out.println(hashMap.get("B"));
-		System.out.println(hashMap.get("E"));
-		System.out.println(hashMap.get("I"));
+////		String[] A = {"A", "B", "D", "G", "E", "I", "E"};
+////		String[] B = {"B", "C", "E", "E", "F", "H", "J"};
+//		
+//		String[] A = {"A", "B", "B", "C", "B", "D", "F", "G"};
+//		String[] B = {"E", "E", "C", "D", "D", "E", "H", "H"};
+//		
+//		int n = A.length;
+//		
+////		System.out.println("HashCode without & n-1");
+////		for(int i = 0; i < n; i++) {
+////			System.out.println(A[i].hashCode());
+////		}
+////		System.out.println("HashCode with & n-1");
+////		for(int i = 0; i < n; i++) {
+////			System.out.println(A[i].hashCode() & (n-1));
+////		}
+//		
+//		MyMap<String, String> hashMap = new MyMap<>();
+////		for(int i = 0; i < n; i++) {
+////			hashMap.put(A[i], B[i]);
+////			hashMap.put(B[i], A[i]);
+////		}
+//		
+//		System.out.println(hashMap.get("A"));
+//		System.out.println(hashMap.get("B"));
+//		System.out.println(hashMap.get("E"));
+//		System.out.println(hashMap.get("I"));
 		
 	}
 	

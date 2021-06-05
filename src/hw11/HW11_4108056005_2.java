@@ -1,14 +1,14 @@
-// Case1: Quick-union with hashMap + no union
+// Case2: Quick-union with hashMap + union
 //package hw11;
 
-public class HW11_4108056005_1 extends GroupCounting {
+public class HW11_4108056005_2 extends GroupCounting {
 	
 	public static MyMap<String, Data> hashMap = new MyMap<>();
 	
 //	public static void main(String[] args) {
 //		
-//		System.out.println("case1:");
-//		HW11_4108056005_1 test = new HW11_4108056005_1();
+//		System.out.println("case2:");
+//		HW11_4108056005_2 test = new HW11_4108056005_2();
 //		testDataHere td = new testDataHere();
 //		
 //		for(int i = 0; i < td.testDataNum; i++) {
@@ -37,23 +37,26 @@ public class HW11_4108056005_1 extends GroupCounting {
 			Data A_data = hashMap.get(A[i]);
 			Data B_data = hashMap.get(B[i]);
 			
-			if(A_data == null && B_data == null) {
+			if(A_data == null && B_data == null) {	// if neither A nor B belong to any group
 				hashMap.put(A[i], new Data(A[i], 1));
 				hashMap.put(B[i], new Data(B[i], 1));
 				union(A[i], B[i]);
 				cnt++;
 			}
-			else if(A_data == null) {
+			else if(A_data == null) {	// if B belongs to a group, but A does not
 				hashMap.put(A[i], new Data(A[i], 1));
 				union(A[i], B[i]);
 			}
-			else if(B_data == null) {
+			else if(B_data == null) {	// if A belongs to a group, but B does not
 				hashMap.put(B[i], new Data(B[i], 1));
 				union(A[i], B[i]);
 			}
-			else if(!connected(A[i], B[i])) {
+			else if(!connected(A[i], B[i])) {	// if A and B belong to the different group
 				union(A[i], B[i]);
 				cnt -= 1;
+			}
+			else {	// if A and B belong to the same group
+				union(A[i], B[i]);
 			}
 		}
 //		show();
@@ -61,20 +64,20 @@ public class HW11_4108056005_1 extends GroupCounting {
 		return cnt;
 	}
 	
-	public String find(String s) {
+	public String find(String s) {	// find the root of s
 		while (s != hashMap.get(s).parent) {
 			s = hashMap.get(s).parent;
 		}
 		return s;
 	}
 
-	public void union(String p, String q) {
+	public void union(String p, String q) {		// weighted quick-union
 		String proot = find(p);
 		String qroot = find(q);
 		Data pdata = hashMap.get(proot);
 		Data qdata = hashMap.get(qroot);
 		
-		if(hashMap.get(proot).size < hashMap.get(qroot).size) {
+		if(hashMap.get(proot).size < hashMap.get(qroot).size) {		// small size point to big size
 			hashMap.put(qroot, new Data(qroot, pdata.size + qdata.size));
 			hashMap.put(proot, new Data(qroot, pdata.size));
 		}
@@ -84,7 +87,7 @@ public class HW11_4108056005_1 extends GroupCounting {
 		}
 	}
 	
-	public boolean connected(String p, String q) {
+	public boolean connected(String p, String q) {	// Are p and q in same group?
 		if(find(p) == find(q)) {
 			return true;
 		}
