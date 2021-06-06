@@ -1,4 +1,4 @@
-// Case3: Quick-union with hashMap + size
+// Case3: kashiwa
 //package hw11;
 
 public class HW11_4108056005_3 extends GroupCounting {
@@ -25,8 +25,9 @@ public class HW11_4108056005_3 extends GroupCounting {
 		int len = A.length;
 		int index = 0;
 		int indexA, indexB;
-		MyHashMap m = new MyHashMap(len<<1);
-		UnionFind uf = new UnionFind(len<<1);
+		int cap = len != 1 ? 1 << (int) Math.ceil(Math.log(len)/Math.log(2)) : 1;
+		MyHashMap m = new MyHashMap(cap<<2);
+		UnionFind uf = new UnionFind(cap<<2);
 
 		for(int i=0; i<len; i++){
 			indexA = m.get(A[i]);
@@ -40,32 +41,34 @@ public class HW11_4108056005_3 extends GroupCounting {
 				indexB = index++;
 				m.put(B[i], indexB);
 			}
+			
+			System.out.println(A[i]+" = "+indexA+", "+B[i]+" = "+indexB);
 
 			uf.union(indexA, indexB);
 		}
 
-		return uf.howManyIsland(index);
+		return uf.getAns(index);
 	}
 
 	private class UnionFind{
-		private int[] unionFindArray;
-		private int[] unionFindArrayWeight;
+		private int[] parent;
+		private int[] weight;
 		private int cap;
 		private int count;
 
 		UnionFind(int size){
 			this.cap = size;
-			unionFindArray = new int[cap];
-			unionFindArrayWeight = new int[cap];
+			parent = new int[cap];
+			weight = new int[cap];
 
 			for(int i=0; i < cap; i++)
-				unionFindArray[i] = i;
+				parent[i] = i;
 		}
 
 		final public int find(int i){
-			while(unionFindArray[i] != i){
-				unionFindArray[i] = unionFindArray[unionFindArray[i]];
-				i = unionFindArray[i];
+			while(parent[i] != i){
+				parent[i] = parent[parent[i]];
+				i = parent[i];
 			}
 			return i;
 		}
@@ -76,16 +79,16 @@ public class HW11_4108056005_3 extends GroupCounting {
 
 			if(a == b) return;
 			count++;
-			if(unionFindArrayWeight[a] > unionFindArrayWeight[b]){
-				unionFindArray[b] = a;
-				unionFindArrayWeight[a] += 1 + unionFindArrayWeight[b];
+			if(weight[a] > weight[b]){
+				parent[b] = a;
+				weight[a] += weight[b];
 			}else{
-				unionFindArray[a] = b;
-				unionFindArrayWeight[b] += 1 + unionFindArrayWeight[a];
+				parent[a] = b;
+				weight[b] += weight[a];
 			}
 		}
 
-		final public int howManyIsland(int end){
+		final public int getAns(int end){
 			return end-count;
 		}
 	}
@@ -107,7 +110,7 @@ public class HW11_4108056005_3 extends GroupCounting {
 	    }
 
 		final public void put(String key, int val){
-	        int index = (key.hashCode() & 0x7fffffff) % this.cap;
+	        int index = (key.hashCode() & 0x7fffffff) & this.cap-1;
 	        Entry newEntry = new Entry();
 	        newEntry.key = key;
 	        newEntry.val = val;
@@ -116,7 +119,7 @@ public class HW11_4108056005_3 extends GroupCounting {
 	    }
 
 	    final public int get(String key){
-	        for(Entry current = list[(key.hashCode() & 0x7fffffff) % this.cap]; current!=null; current=current.next){
+	        for(Entry current = list[(key.hashCode() & 0x7fffffff) & this.cap-1]; current!=null; current=current.next){
 	            if(current.key.equals(key)){
 	                return current.val;
 	            }
