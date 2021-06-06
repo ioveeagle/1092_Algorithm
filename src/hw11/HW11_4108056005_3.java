@@ -3,6 +3,10 @@
 
 public class HW11_4108056005_3 extends GroupCounting {
 	
+	final int _cap = 131072;
+	MyHashMap m = new MyHashMap(_cap);
+	UnionFind uf = new UnionFind(_cap);
+	
 //	public static void main(String[] args) {
 //
 //		System.out.println("case3:");
@@ -25,9 +29,6 @@ public class HW11_4108056005_3 extends GroupCounting {
 		int len = A.length;
 		int index = 0;
 		int indexA, indexB;
-		int cap = len != 1 ? 1 << (int) Math.ceil(Math.log(len)/Math.log(2)) : 1;
-		MyHashMap m = new MyHashMap(cap<<2);
-		UnionFind uf = new UnionFind(cap<<2);
 
 		for(int i=0; i<len; i++){
 			indexA = m.get(A[i]);
@@ -42,7 +43,7 @@ public class HW11_4108056005_3 extends GroupCounting {
 				m.put(B[i], indexB);
 			}
 			
-			System.out.println(A[i]+" = "+indexA+", "+B[i]+" = "+indexB);
+//			System.out.println(A[i]+" = "+indexA+", "+B[i]+" = "+indexB);
 
 			uf.union(indexA, indexB);
 		}
