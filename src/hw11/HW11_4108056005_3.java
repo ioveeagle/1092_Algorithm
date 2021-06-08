@@ -1,11 +1,19 @@
-// Case3: kashiwa
+// Case3: faster Quick-union
 //package hw11;
 
 public class HW11_4108056005_3 extends GroupCounting {
 	
-	final int _cap = 131072;
+	final static int _cap = (int)Math.pow(2, 20);
+	static int[] parent = new int[_cap];
+	static int[] weight = new int[_cap];
+	static int count = 0;
 	MyHashMap m = new MyHashMap(_cap);
-	UnionFind uf = new UnionFind(_cap);
+	
+	public HW11_4108056005_3() {
+		for(int i=0; i < _cap; i++) {
+			parent[i] = i;
+		}
+	}
 	
 //	public static void main(String[] args) {
 //
@@ -25,12 +33,12 @@ public class HW11_4108056005_3 extends GroupCounting {
 //		System.out.println("elapsed time " + time);
 //	}
 	
-	public int count(String[] A, String[] B){
+	public int count(String[] A, String[] B) {
 		int len = A.length;
 		int index = 0;
 		int indexA, indexB;
 
-		for(int i=0; i<len; i++){
+		for(int i=0; i<len; i++) {
 			indexA = m.get(A[i]);
 			if(indexA == -1){
 				indexA = index++;
@@ -38,64 +46,44 @@ public class HW11_4108056005_3 extends GroupCounting {
 			}
 
 			indexB = m.get(B[i]);
-			if(indexB == -1){
+			if(indexB == -1) {
 				indexB = index++;
 				m.put(B[i], indexB);
 			}
+			union(indexA, indexB);
 			
 //			System.out.println(A[i]+" = "+indexA+", "+B[i]+" = "+indexB);
-
-			uf.union(indexA, indexB);
 		}
 
-		return uf.getAns(index);
+		return index-count;
 	}
 
-	private class UnionFind{
-		private int[] parent;
-		private int[] weight;
-		private int cap;
-		private int count;
-
-		UnionFind(int size){
-			this.cap = size;
-			parent = new int[cap];
-			weight = new int[cap];
-
-			for(int i=0; i < cap; i++)
-				parent[i] = i;
+	public static int find(int i) {
+		while(parent[i] != i){
+			parent[i] = parent[parent[i]];
+			i = parent[i];
 		}
+		return i;
+	}
 
-		final public int find(int i){
-			while(parent[i] != i){
-				parent[i] = parent[parent[i]];
-				i = parent[i];
-			}
-			return i;
+	public static void union(int a, int b) {
+		a = find(a);
+		b = find(b);
+
+		if(a == b) return;
+		count++;
+		if(weight[a] > weight[b]) {
+			parent[b] = a;
+			weight[a] += weight[b];
 		}
-
-		final public void union(int a, int b){
-			a = find(a);
-			b = find(b);
-
-			if(a == b) return;
-			count++;
-			if(weight[a] > weight[b]){
-				parent[b] = a;
-				weight[a] += weight[b];
-			}else{
-				parent[a] = b;
-				weight[b] += weight[a];
-			}
-		}
-
-		final public int getAns(int end){
-			return end-count;
+		else {
+			parent[a] = b;
+			weight[b] += weight[a];
 		}
 	}
 
-	private class MyHashMap{
-	    class Entry{
+	private class MyHashMap {
+	    class Entry {
 	        public String key;
 	        public int val;
 	        public Entry next;
@@ -104,13 +92,13 @@ public class HW11_4108056005_3 extends GroupCounting {
 	    private int cap;
 	    private Entry[] list;
 
-	    MyHashMap(int size){
+	    MyHashMap(int size) {
 	        this.cap = size;
 	        Entry[] newEntry = new Entry[this.cap];
 	        this.list = newEntry;
 	    }
 
-		final public void put(String key, int val){
+		final public void put(String key, int val) {
 	        int index = (key.hashCode() & 0x7fffffff) & this.cap-1;
 	        Entry newEntry = new Entry();
 	        newEntry.key = key;
@@ -119,9 +107,9 @@ public class HW11_4108056005_3 extends GroupCounting {
 	        list[index] = newEntry;
 	    }
 
-	    final public int get(String key){
-	        for(Entry current = list[(key.hashCode() & 0x7fffffff) & this.cap-1]; current!=null; current=current.next){
-	            if(current.key.equals(key)){
+	    final public int get(String key) {
+	        for(Entry current = list[(key.hashCode() & 0x7fffffff) & this.cap-1]; current!=null; current=current.next) {
+	            if(current.key.equals(key)) {
 	                return current.val;
 	            }
 	        }
