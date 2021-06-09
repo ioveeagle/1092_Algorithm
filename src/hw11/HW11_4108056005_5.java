@@ -3,14 +3,15 @@
 
 public class HW11_4108056005_5 extends GroupCounting {
 	
-	final static int _cap = (int)Math.pow(2, 20);	// 1048576
-	static int[] parent = new int[_cap];
-	static int[] weight = new int[_cap];
-	static int count = 0;
+	final int _cap = (int)Math.pow(2, 20);	// 1048576
+	int[] parent = new int[_cap];
+	int[] weight = new int[_cap];
+	int count = 0;
 	
 	public HW11_4108056005_5() {
-		for(int i=0; i < _cap; i++) {
+		for(int i = 0; i < _cap; i++) {
 			parent[i] = i;
+			weight[i] = 0;
 		}
 	}
 	
@@ -53,11 +54,11 @@ public class HW11_4108056005_5 extends GroupCounting {
 			
 //			System.out.println(A[i]+" = "+indexA+", "+B[i]+" = "+indexB);
 		}
-
+		
 		return total-count;
 	}
 
-	public static int find(int i) {
+	public int find(int i) {
 		while(parent[i] != i){
 			parent[i] = parent[parent[i]];
 			i = parent[i];
@@ -65,7 +66,7 @@ public class HW11_4108056005_5 extends GroupCounting {
 		return i;
 	}
 
-	public static void union(int a, int b) {
+	public void union(int a, int b) {
 		a = find(a);
 		b = find(b);
 
@@ -73,11 +74,11 @@ public class HW11_4108056005_5 extends GroupCounting {
 		count++;
 		if(weight[a] > weight[b]) {
 			parent[b] = a;
-			weight[a] += weight[b];
+			weight[a] += weight[b] + 1;
 		}
 		else {
 			parent[a] = b;
-			weight[b] += weight[a];
+			weight[b] += weight[a] + 1;
 		}
 	}
 }

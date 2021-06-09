@@ -7,7 +7,7 @@ public class TestDataGenerator {
 	// 每 ctrl+F11 就產生一筆新測資
 	public static void main(String[] args) {
 		TestDataGenerator tdg = new TestDataGenerator();
-		tdg.createData(1000, 2000);
+		tdg.createData(500000, 500000);
 	}
 
 	// 產生新測資

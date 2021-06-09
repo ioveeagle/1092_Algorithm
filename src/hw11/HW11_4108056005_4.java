@@ -1,25 +1,25 @@
 // Case4: tw
-//package hw11;
+package hw11;
 
 public class HW11_4108056005_4 extends GroupCounting {
 
-//	public static void main(String[] args) {
-//
-//		System.out.println("case4:");
-//		HW11_4108056005_4 test = new HW11_4108056005_4();
-//		TestDataGenerator tdg = new TestDataGenerator();
-//		String[][] input = tdg.readData();
-//
-//		String[] A = input[0];
-//		String[] B = input[1];
-//
-//		Stopwatch stopwatch = new Stopwatch();
-//		int ans = test.count(A, B);
-//		double time = stopwatch.elapsedTime();
-//		System.out.println("MyAns = "+ans);
-//		System.out.println("Ans = "+tdg.readAns());
-//		System.out.println("elapsed time " + time);
-//	}
+	public static void main(String[] args) {
+
+		System.out.println("case4:");
+		HW11_4108056005_4 test = new HW11_4108056005_4();
+		TestDataGenerator tdg = new TestDataGenerator();
+		String[][] input = tdg.readData();
+
+		String[] A = input[0];
+		String[] B = input[1];
+
+		Stopwatch stopwatch = new Stopwatch();
+		int ans = test.count(A, B);
+		double time = stopwatch.elapsedTime();
+		System.out.println("MyAns = "+ans);
+		System.out.println("Ans = "+tdg.readAns());
+		System.out.println("elapsed time " + time);
+	}
 
 	final class Slot {
 		final Slot NEXT;
