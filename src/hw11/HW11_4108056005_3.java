@@ -3,7 +3,7 @@
 
 public class HW11_4108056005_3 extends GroupCounting {
 	
-	final int _cap = (int)Math.pow(2, 20);
+	final int _cap = (int)Math.pow(2, 19);
 	int[] parent = new int[_cap];
 	int[] weight = new int[_cap];
 	int count = 0;
