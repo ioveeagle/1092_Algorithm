@@ -17,6 +17,7 @@
 * [HW08_Buy Phone v2.](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw08)
 * [HW09_LSD](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw09)
 * [HW10_Sorting](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw10)
+* [HW11_Group Counting](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw11)
 
 > 好運貓貓祝你期末歐趴~~
 
