@@ -7,10 +7,10 @@
 **為了提升開源風氣，我也把我的演算法作業也改成公開的了。**
 
 ## overview
-* [HW01_max and min](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw01)
-* [HW02_three sum](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw02)
-* [HW03_hill finding](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw03)
-* [HW04_one 0k rock](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw04)
+* [HW01_Max and min](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw01)
+* [HW02_Three sum](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw02)
+* [HW03_Hill finding](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw03)
+* [HW04_One 0k rock](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw04)
 * [HW05_LLK](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw05)
 * [HW06_Dessert Desert](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw06)
 * [HW07_Buy Phone](https://github.com/AndyChiangSH/1092_Algorithm/tree/master/src/hw07)
